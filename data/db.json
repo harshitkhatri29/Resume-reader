@@ -1,0 +1,1550 @@
+{
+  "analyses": {
+    "demo-analysis-1": {
+      "id": "demo-analysis-1",
+      "resume_id": "resume-demo-1",
+      "job_target_id": "jd-demo-1",
+      "role_title": "Frontend Engineer",
+      "target_company": "Vercel / TechCorp",
+      "created_at": "2026-11-18T03:23:49.075Z",
+      "status": "completed",
+      "is_ai_powered": true,
+      "parsed_resume": {
+        "contact": {
+          "name": "Alex Chen",
+          "email": "alex.chen@example.com",
+          "phone": "+1 (555) 234-5678",
+          "location": "San Francisco, CA",
+          "github": "github.com/alexchen-dev",
+          "linkedin": "linkedin.com/in/alexchen-dev"
+        },
+        "summary": "Passionate Junior Frontend Developer with 1.5 years experience building accessible, responsive web applications using React, JavaScript, and Tailwind CSS. Eager to deepen TypeScript and Next.js expertise.",
+        "skills": [
+          "React",
+          "JavaScript (ES6+)",
+          "HTML5",
+          "CSS3",
+          "Tailwind CSS",
+          "Git",
+          "REST APIs",
+          "Redux Toolkit",
+          "Jest (Basic)",
+          "Figma"
+        ],
+        "experience": [
+          {
+            "company": "PixelCraft Studio",
+            "role": "Junior Frontend Developer",
+            "duration": "Jan 2023 – Present",
+            "location": "San Francisco, CA",
+            "bullets": [
+              "Built reusable React components for 4 client websites, improving page load speed by 28%",
+              "Collaborated with UX designers in Figma to translate wireframes into mobile-first responsive interfaces",
+              "Implemented client-side form validation and integrated RESTful backend APIs"
+            ]
+          },
+          {
+            "company": "CodeCamp Freelance",
+            "role": "Web Development Intern",
+            "duration": "Jun 2022 – Dec 2022",
+            "location": "Remote",
+            "bullets": [
+              "Maintained landing pages and fixed UI bugs using HTML5, modern CSS, and vanilla JavaScript",
+              "Integrated Google Analytics tracking scripts and improved accessibility audit scores"
+            ]
+          }
+        ],
+        "education": [
+          {
+            "institution": "University of California, Davis",
+            "degree": "B.S. in Computer Science",
+            "year": "2022",
+            "details": "Dean's Honor List, coursework in Data Structures, Algorithms, Web Architecture"
+          }
+        ],
+        "projects": [
+          {
+            "name": "DevBoard - Kanban Task Manager",
+            "description": "Interactive drag-and-drop task dashboard built with React and LocalStorage persistence.",
+            "technologies": [
+              "React",
+              "Tailwind CSS",
+              "Drag & Drop API"
+            ],
+            "link": "https://github.com/alexchen-dev/devboard"
+          }
+        ],
+        "certifications": [
+          "Meta Front-End Developer Professional Certificate (Coursera)"
+        ],
+        "raw_text": "Alex Chen\nalex.chen@example.com | San Francisco, CA\n..."
+      },
+      "parsed_jd": {
+        "title": "Frontend Engineer",
+        "company": "Vercel / TechCorp",
+        "level": "Mid-Level",
+        "location": "Remote / US",
+        "summary": "We are seeking a Frontend Engineer with solid React and TypeScript skills, experience with Next.js App Router, state management, and modern testing to build high-performance web applications.",
+        "responsibilities": [
+          "Architect and deliver production-grade user interfaces using Next.js, React, and TypeScript",
+          "Implement automated unit and component tests with Jest and React Testing Library",
+          "Collaborate with product and backend teams to integrate GraphQL and REST APIs",
+          "Optimize Core Web Vitals (LCP, CLS, INP) for consumer-facing apps"
+        ],
+        "required_skills": [
+          "React",
+          "TypeScript",
+          "Next.js",
+          "HTML/CSS/Tailwind",
+          "REST/GraphQL APIs",
+          "Git"
+        ],
+        "preferred_skills": [
+          "Core Web Vitals Optimization",
+          "Jest / React Testing Library",
+          "CI/CD Pipelines",
+          "State Management (Zustand/Redux)"
+        ],
+        "qualifications": [
+          "2+ years of professional web development experience",
+          "Proficiency with TypeScript and React component architecture",
+          "Demonstrated understanding of web performance and accessibility (WCAG)"
+        ],
+        "raw_text": "Job Title: Frontend Engineer\nCompany: TechCorp..."
+      },
+      "readiness": {
+        "overall_score": 72,
+        "dimensions": {
+          "core_skills": 75,
+          "experience_relevance": 68,
+          "education_credentials": 90,
+          "ats_readability": 82
+        },
+        "summary": "Strong foundational alignment for Frontend Engineer. React, Tailwind, and REST integration are solidly evidenced. The primary gaps are professional TypeScript depth, Next.js App Router experience, and automated component testing."
+      },
+      "requirement_matches": [
+        {
+          "id": "req-1",
+          "requirement": "React Component Architecture",
+          "type": "required",
+          "status": "evidenced",
+          "jd_citation": "Architect and deliver production-grade user interfaces using React",
+          "resume_evidence": "Built reusable React components for 4 client websites at PixelCraft Studio; Built DevBoard with React",
+          "explanation": "Demonstrated professional React experience and personal projects directly match the role requirement.",
+          "priority": "high",
+          "actionable_guidance": "Highlight custom hooks and performance patterns in your project descriptions."
+        },
+        {
+          "id": "req-2",
+          "requirement": "TypeScript Proficiency",
+          "type": "required",
+          "status": "partially_evidenced",
+          "jd_citation": "Proficiency with TypeScript and React component architecture",
+          "resume_evidence": "Resume mentions \"JavaScript (ES6+)\" and eager to deepen TypeScript; no specific TypeScript projects cited.",
+          "explanation": "You have solid modern JavaScript foundations, but no explicit TypeScript usage is shown in bullet points.",
+          "priority": "high",
+          "actionable_guidance": "Migrate one of your open-source projects (e.g., DevBoard) to strict TypeScript and add TypeScript to your technical skills list."
+        },
+        {
+          "id": "req-3",
+          "requirement": "Next.js App Router Experience",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Experience with Next.js App Router and server-rendered components",
+          "resume_evidence": "Not found in resume text.",
+          "explanation": "No Next.js or SSR framework experience is evidenced in your work history or projects.",
+          "priority": "high",
+          "actionable_guidance": "Build a small full-stack or API-integrated demo using Next.js 14/15 App Router and deploy it on Vercel."
+        },
+        {
+          "id": "req-4",
+          "requirement": "Automated Testing (Jest / React Testing Library)",
+          "type": "preferred",
+          "status": "partially_evidenced",
+          "jd_citation": "Implement automated unit and component tests with Jest and React Testing Library",
+          "resume_evidence": "Resume lists \"Jest (Basic)\" in skills, but no testing metrics or achievements in experience bullets.",
+          "explanation": "Skill is listed as a keyword, but lack of concrete project evidence will make interviewers question your test coverage experience.",
+          "priority": "medium",
+          "actionable_guidance": "Add unit tests for key React components in your GitHub repo and document test coverage."
+        },
+        {
+          "id": "req-5",
+          "requirement": "Tailwind CSS & Responsive UI",
+          "type": "required",
+          "status": "evidenced",
+          "jd_citation": "HTML/CSS/Tailwind and responsive mobile-first layouts",
+          "resume_evidence": "PixelCraft Studio: \"translated wireframes into mobile-first responsive interfaces with Tailwind CSS\"",
+          "explanation": "Directly supported by verified workplace achievements.",
+          "priority": "medium",
+          "actionable_guidance": "Keep this bullet highlighted; it provides solid credibility."
+        },
+        {
+          "id": "req-6",
+          "requirement": "Web Performance & Core Web Vitals",
+          "type": "preferred",
+          "status": "partially_evidenced",
+          "jd_citation": "Optimize Core Web Vitals (LCP, CLS, INP) for consumer-facing apps",
+          "resume_evidence": "Resume mentions \"improving page load speed by 28%\", but does not mention specific Core Web Vitals metrics.",
+          "explanation": "Great speed improvement bullet, but grounding it in specific metrics like LCP or Lighthouse scores strengthens it.",
+          "priority": "medium",
+          "actionable_guidance": "Clarify the 28% speed improvement in your resume: \"improving Lighthouse performance score from 68 to 96 and reducing LCP by 1.2s\"."
+        }
+      ],
+      "ats_diagnostics": {
+        "overall_ats_score": 82,
+        "readability_score": 85,
+        "sections_detected": {
+          "contact": true,
+          "summary": true,
+          "experience": true,
+          "education": true,
+          "skills": true,
+          "projects": true
+        },
+        "file_format_health": {
+          "status": "pass",
+          "message": "Clean single-column structure with standard ATS header tags."
+        },
+        "keyword_insights": {
+          "matched_keywords": [
+            "React",
+            "JavaScript",
+            "HTML5",
+            "CSS3",
+            "Tailwind CSS",
+            "Git",
+            "REST APIs",
+            "Redux",
+            "Figma"
+          ],
+          "missing_critical_keywords": [
+            "TypeScript",
+            "Next.js",
+            "React Testing Library",
+            "Core Web Vitals"
+          ],
+          "recommended_context_keywords": [
+            "SSR",
+            "Component Lifecycle",
+            "Lighthouse",
+            "CI/CD"
+          ]
+        },
+        "formatting_issues": [
+          {
+            "id": "fmt-1",
+            "category": "keywords",
+            "issue": "High-priority JD requirement \"TypeScript\" is missing from your Skills list",
+            "severity": "critical",
+            "fix": "Add TypeScript once you have completed migration of a sample project to reflect truthful competency."
+          },
+          {
+            "id": "fmt-2",
+            "category": "content",
+            "issue": "Experience bullets could benefit from stronger metric framing (XYZ formula)",
+            "severity": "moderate",
+            "fix": "Quantify impact where possible: e.g. \"reduced bundle size by 24% by lazy-loading heavy vendor assets\"."
+          },
+          {
+            "id": "fmt-3",
+            "category": "structure",
+            "issue": "Summary statement contains tentative phrasing (\"eager to deepen\")",
+            "severity": "tip",
+            "fix": "Replace tentative phrases with active, confident value statements."
+          }
+        ],
+        "actionable_summary": "Your resume passes standard ATS parsing filters with flying colors. Addressing the missing TypeScript and Next.js keywords through demonstrated project experience will boost your match confidence."
+      }
+    },
+    "analysis-1795145032905": {
+      "id": "analysis-1795145032905",
+      "resume_id": "res-1795145032905",
+      "job_target_id": "jd-1795145032905",
+      "role_title": "Software Development Engineer Intern",
+      "target_company": "Nexora Technologies",
+      "created_at": "2026-11-20T03:23:52.905Z",
+      "status": "completed",
+      "is_ai_powered": false,
+      "parsed_resume": {
+        "contact": {
+          "name": "Candidate",
+          "location": "Remote / Available"
+        },
+        "summary": "",
+        "skills": [
+          "React",
+          "JavaScript",
+          "HTML/CSS",
+          "Git"
+        ],
+        "experience": [
+          {
+            "role": "Software Developer / Projects",
+            "company": "Experience & Open Source",
+            "duration": "Recent",
+            "bullets": []
+          }
+        ],
+        "education": [
+          {
+            "institution": "Higher Education / Relevant Coursework",
+            "degree": "B.S. or Equivalent Experience"
+          }
+        ],
+        "projects": [
+          {
+            "name": "Technical Project Portfolio",
+            "description": "Web application and software tools showcasing full-stack capabilities and modern UI.",
+            "technologies": []
+          }
+        ],
+        "certifications": [],
+        "raw_text": "n+gN&!DTc]%R5'C:?XBVRA7]<M>s?4_WqG8!?6#mAc^D;@a\\;%5XOlbRG>FWG31/>bBi\\?NpP[556]HBS77%8b8&W\"]qgf`YhH]?BbY*\\VqC@0a2F:KF.h\"^_IT9_Ag*Ue$%C]LfNI%pQiinjfAU&]nGji1h&=8/8J35D#'-K`[=\\K5FeCMdfc"
+      },
+      "parsed_jd": {
+        "title": "Software Development Engineer Intern",
+        "company": "Nexora Technologies",
+        "level": "Senior",
+        "responsibilities": [
+          "Develop and maintain web applications using React.js, JavaScript, HTML, and CSS.",
+          "Build and integrate RESTful APIs using Node.js and Express.js.",
+          "Work with databases such as MongoDB and PostgreSQL.",
+          "Write clean, efficient, reusable, and maintainable code.",
+          "Collaborate with UI/UX designers, developers, and product managers."
+        ],
+        "required_skills": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "JavaScript",
+          "Node.js",
+          "Python",
+          "Java",
+          "PostgreSQL",
+          "REST APIs",
+          "Docker"
+        ],
+        "preferred_skills": [
+          "AWS",
+          "Azure",
+          "CI/CD",
+          "Git",
+          "Agile"
+        ],
+        "qualifications": [
+          "Demonstrated experience with modern software engineering practices",
+          "Strong problem-solving and communication skills",
+          "Passion for building high-quality, performant software"
+        ],
+        "raw_text": "**About the Company:**\r\nNexora Technologies is an emerging technology startup focused on building scalable software solutions, cloud-based applications, and AI-powered products for businesses worldwide.\r\n\r\n**Role: Software Development Engineer Intern**\r\n\r\n**Responsibilities:**\r\n- Develop and maintain web applications using React.js, JavaScript, HTML, and CSS.\r\n- Build and integrate RESTful APIs using Node.js and Express.js.\r\n- Work with databases such as MongoDB and PostgreSQL.\r\n- Write clean, efficient, reusable, and maintainable code.\r\n- Collaborate with UI/UX designers, developers, and product managers.\r\n- Debug applications, identify performance issues, and implement solutions.\r\n- Participate in code reviews and agile development meetings.\r\n\r\n**Required Skills:**\r\n- Strong understanding of Data Structures and Algorithms.\r\n- Proficiency in JavaScript, HTML, CSS, and basic React.js.\r\n- Familiarity with Python, Java, or C++.\r\n- Understanding of DBMS, OOP concepts, and computer networks.\r\n- Knowledge of Git and GitHub.\r\n- Basic understanding of REST APIs and backend development.\r\n\r\n**Preferred Skills:**\r\n- Experience with Next.js or TypeScript.\r\n- Familiarity with cloud platforms such as AWS or Azure.\r\n- Experience building personal or academic software projects.\r\n- Basic knowledge of Docker and CI/CD pipelines.\r\n\r\n**Qualifications:**\r\n- Pursuing a Bachelor's degree in Computer Science, Information Technology, or a related field.\r\n- 0–1 years of professional experience.\r\n- Strong problem-solving and analytical abilities.\r\n- Good communication and teamwork skills.\r\n\r\n**Seniority:** Entry Level / Internship\r\n\r\n**Location:** Bengaluru, India (Hybrid)\r\n\r\n**Duration:** 6 Months\r\n\r\n**Compensation:** ₹25,000–₹35,000 per month"
+      },
+      "readiness": {
+        "overall_score": 53,
+        "dimensions": {
+          "core_skills": 40,
+          "experience_relevance": 45,
+          "education_credentials": 88,
+          "ats_readability": 82
+        },
+        "summary": "Found 0 evidenced and 3 partially evidenced skills for Software Development Engineer Intern. Focus your learning on missing requirements (Next.js, TypeScript, Node.js)."
+      },
+      "requirement_matches": [
+        {
+          "id": "req-1",
+          "requirement": "React",
+          "type": "required",
+          "status": "partially_evidenced",
+          "jd_citation": "Target role requires proficiency in React",
+          "resume_evidence": "Listed in skills section but lacks detailed project bullets.",
+          "explanation": "Recognized in resume, but lacks evidence of production use or tangible outcomes.",
+          "priority": "high",
+          "actionable_guidance": "Add a specific achievement bullet describing how you applied React."
+        },
+        {
+          "id": "req-2",
+          "requirement": "Next.js",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in Next.js",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"Next.js\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating Next.js and document it in your portfolio."
+        },
+        {
+          "id": "req-3",
+          "requirement": "TypeScript",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in TypeScript",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"TypeScript\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating TypeScript and document it in your portfolio."
+        },
+        {
+          "id": "req-4",
+          "requirement": "JavaScript",
+          "type": "required",
+          "status": "partially_evidenced",
+          "jd_citation": "Target role requires proficiency in JavaScript",
+          "resume_evidence": "Listed in skills section but lacks detailed project bullets.",
+          "explanation": "Recognized in resume, but lacks evidence of production use or tangible outcomes.",
+          "priority": "high",
+          "actionable_guidance": "Add a specific achievement bullet describing how you applied JavaScript."
+        },
+        {
+          "id": "req-5",
+          "requirement": "Node.js",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in Node.js",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"Node.js\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating Node.js and document it in your portfolio."
+        },
+        {
+          "id": "req-6",
+          "requirement": "Python",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in Python",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"Python\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating Python and document it in your portfolio."
+        },
+        {
+          "id": "req-7",
+          "requirement": "Java",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in Java",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"Java\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating Java and document it in your portfolio."
+        },
+        {
+          "id": "req-8",
+          "requirement": "PostgreSQL",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in PostgreSQL",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"PostgreSQL\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating PostgreSQL and document it in your portfolio."
+        },
+        {
+          "id": "req-9",
+          "requirement": "REST APIs",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in REST APIs",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"REST APIs\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating REST APIs and document it in your portfolio."
+        },
+        {
+          "id": "req-10",
+          "requirement": "Docker",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in Docker",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"Docker\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating Docker and document it in your portfolio."
+        },
+        {
+          "id": "req-11",
+          "requirement": "AWS",
+          "type": "preferred",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in AWS",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"AWS\" was not evidenced in your uploaded resume.",
+          "priority": "medium",
+          "actionable_guidance": "Build a hands-on project demonstrating AWS and document it in your portfolio."
+        },
+        {
+          "id": "req-12",
+          "requirement": "Azure",
+          "type": "preferred",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in Azure",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"Azure\" was not evidenced in your uploaded resume.",
+          "priority": "medium",
+          "actionable_guidance": "Build a hands-on project demonstrating Azure and document it in your portfolio."
+        },
+        {
+          "id": "req-13",
+          "requirement": "CI/CD",
+          "type": "preferred",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in CI/CD",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"CI/CD\" was not evidenced in your uploaded resume.",
+          "priority": "medium",
+          "actionable_guidance": "Build a hands-on project demonstrating CI/CD and document it in your portfolio."
+        },
+        {
+          "id": "req-14",
+          "requirement": "Git",
+          "type": "preferred",
+          "status": "partially_evidenced",
+          "jd_citation": "Target role requires proficiency in Git",
+          "resume_evidence": "Listed in skills section but lacks detailed project bullets.",
+          "explanation": "Recognized in resume, but lacks evidence of production use or tangible outcomes.",
+          "priority": "medium",
+          "actionable_guidance": "Add a specific achievement bullet describing how you applied Git."
+        },
+        {
+          "id": "req-15",
+          "requirement": "Agile",
+          "type": "preferred",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in Agile",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"Agile\" was not evidenced in your uploaded resume.",
+          "priority": "medium",
+          "actionable_guidance": "Build a hands-on project demonstrating Agile and document it in your portfolio."
+        }
+      ],
+      "ats_diagnostics": {
+        "overall_ats_score": 61,
+        "readability_score": 82,
+        "sections_detected": {
+          "contact": false,
+          "summary": false,
+          "experience": true,
+          "education": true,
+          "skills": true,
+          "projects": true
+        },
+        "file_format_health": {
+          "status": "pass",
+          "message": "Standard document formatting recognized by common ATS scanners."
+        },
+        "keyword_insights": {
+          "matched_keywords": [
+            "React",
+            "JavaScript",
+            "Git"
+          ],
+          "missing_critical_keywords": [
+            "Next.js",
+            "TypeScript",
+            "Node.js",
+            "Python",
+            "Java",
+            "PostgreSQL",
+            "REST APIs",
+            "Docker",
+            "AWS",
+            "Azure",
+            "CI/CD",
+            "Agile"
+          ],
+          "recommended_context_keywords": [
+            "System Architecture",
+            "Agile / Scrum",
+            "CI/CD Pipelines"
+          ]
+        },
+        "formatting_issues": [
+          {
+            "id": "issue-1",
+            "category": "keywords",
+            "issue": "Critical target keywords missing: Next.js, TypeScript, Node.js",
+            "severity": "critical",
+            "fix": "Incorporate these skills into your learning roadmap and resume once verified."
+          },
+          {
+            "id": "issue-2",
+            "category": "structure",
+            "issue": "Professional summary is absent or very brief",
+            "severity": "moderate",
+            "fix": "Include a 2-3 sentence summary defining your core stack and target engineering focus."
+          },
+          {
+            "id": "issue-3",
+            "category": "formatting",
+            "issue": "Use standard bullet action verbs and measurable outcomes (XYZ formula)",
+            "severity": "tip",
+            "fix": "Revise bullets using: Accomplished [X], as measured by [Y], by doing [Z]."
+          }
+        ],
+        "actionable_summary": "Your resume demonstrates good structure. Closing 12 gap(s) will significantly improve recruiter alignment."
+      }
+    },
+    "analysis-1795145128431": {
+      "id": "analysis-1795145128431",
+      "resume_id": "res-1795145128431",
+      "job_target_id": "jd-1795145128431",
+      "role_title": "AI Engineer Intern",
+      "target_company": "NeuralForge AI",
+      "created_at": "2026-11-20T03:25:28.431Z",
+      "status": "completed",
+      "is_ai_powered": false,
+      "parsed_resume": {
+        "contact": {
+          "name": "Candidate",
+          "location": "Remote / Available"
+        },
+        "summary": "",
+        "skills": [
+          "React",
+          "JavaScript",
+          "HTML/CSS",
+          "Git"
+        ],
+        "experience": [
+          {
+            "role": "Software Developer / Projects",
+            "company": "Experience & Open Source",
+            "duration": "Recent",
+            "bullets": []
+          }
+        ],
+        "education": [
+          {
+            "institution": "Higher Education / Relevant Coursework",
+            "degree": "B.S. or Equivalent Experience"
+          }
+        ],
+        "projects": [
+          {
+            "name": "Technical Project Portfolio",
+            "description": "Web application and software tools showcasing full-stack capabilities and modern UI.",
+            "technologies": []
+          }
+        ],
+        "certifications": [],
+        "raw_text": "n+gN&!DTc]%R5'C:?XBVRA7]<M>s?4_WqG8!?6#mAc^D;@a\\;%5XOlbRG>FWG31/>bBi\\?NpP[556]HBS77%8b8&W\"]qgf`YhH]?BbY*\\VqC@0a2F:KF.h\"^_IT9_Ag*Ue$%C]LfNI%pQiinjfAU&]nGji1h&=8/8J35D#'-K`[=\\K5FeCMdfc"
+      },
+      "parsed_jd": {
+        "title": "AI Engineer Intern",
+        "company": "NeuralForge AI",
+        "level": "Senior",
+        "responsibilities": [
+          "Design, develop, and implement machine learning models for real-world applications.",
+          "Build and optimize AI-powered applications using Python and modern AI frameworks.",
+          "Develop Retrieval-Augmented Generation (RAG) pipelines using LangChain and vector databases.",
+          "Work with Large Language Models (LLMs) and integrate APIs from providers such as OpenAI and Google Gemini.",
+          "Perform data preprocessing, feature engineering, and model evaluation."
+        ],
+        "required_skills": [
+          "Python",
+          "REST APIs",
+          "Docker"
+        ],
+        "preferred_skills": [
+          "Git"
+        ],
+        "qualifications": [
+          "Demonstrated experience with modern software engineering practices",
+          "Strong problem-solving and communication skills",
+          "Passion for building high-quality, performant software"
+        ],
+        "raw_text": "**About the Company:**\r\n\r\nNeuralForge AI is an innovative artificial intelligence startup developing intelligent automation solutions, generative AI applications, and machine learning products. We focus on building scalable AI systems that solve real-world business problems.\r\n\r\n**Role: AI Engineer Intern**\r\n\r\n**Responsibilities:**\r\n- Design, develop, and implement machine learning models for real-world applications.\r\n- Build and optimize AI-powered applications using Python and modern AI frameworks.\r\n- Develop Retrieval-Augmented Generation (RAG) pipelines using LangChain and vector databases.\r\n- Work with Large Language Models (LLMs) and integrate APIs from providers such as OpenAI and Google Gemini.\r\n- Perform data preprocessing, feature engineering, and model evaluation.\r\n- Build REST APIs to integrate AI models with web applications.\r\n- Experiment with prompt engineering, embeddings, and semantic search.\r\n- Collaborate with software engineers and product teams to deploy AI-powered solutions.\r\n- Debug, test, and optimize AI application performance.\r\n\r\n**Required Skills:**\r\n- Strong programming knowledge in Python.\r\n- Understanding of Machine Learning fundamentals and algorithms.\r\n- Knowledge of supervised and unsupervised learning.\r\n- Familiarity with NumPy, Pandas, and Scikit-learn.\r\n- Understanding of Deep Learning concepts and neural networks.\r\n- Knowledge of NLP, text embeddings, and transformers.\r\n- Familiarity with REST APIs and Git/GitHub.\r\n- Understanding of Data Structures, Algorithms, and OOP concepts.\r\n\r\n**Preferred Skills:**\r\n- Hands-on experience with LangChain or LlamaIndex.\r\n- Experience building RAG-based applications.\r\n- Familiarity with vector databases such as FAISS, ChromaDB, or Qdrant.\r\n- Knowledge of Hugging Face Transformers.\r\n- Experience working with LLM APIs and prompt engineering.\r\n- Basic understanding of Docker and cloud deployment.\r\n- Experience deploying AI applications using FastAPI or Flask.\r\n\r\n**Qualifications:**\r\n- Pursuing a Bachelor's or Master's degree in Computer Science, Artificial Intelligence, Data Science, or a related field.\r\n- 0–1 years of professional experience.\r\n- Academic projects, internships, or personal projects in AI/ML are desirable.\r\n- Strong analytical, problem-solving, and communication skills.\r\n\r\n**Seniority:** Entry Level / Internship\r\n\r\n**Location:** Bengaluru, India (Hybrid)\r\n\r\n**Duration:** 6 Months\r\n\r\n**Compensation:** ₹30,000–₹45,000 per month"
+      },
+      "readiness": {
+        "overall_score": 53,
+        "dimensions": {
+          "core_skills": 40,
+          "experience_relevance": 45,
+          "education_credentials": 88,
+          "ats_readability": 82
+        },
+        "summary": "Found 0 evidenced and 1 partially evidenced skills for AI Engineer Intern. Focus your learning on missing requirements (Python, REST APIs, Docker)."
+      },
+      "requirement_matches": [
+        {
+          "id": "req-1",
+          "requirement": "Python",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in Python",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"Python\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating Python and document it in your portfolio."
+        },
+        {
+          "id": "req-2",
+          "requirement": "REST APIs",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in REST APIs",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"REST APIs\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating REST APIs and document it in your portfolio."
+        },
+        {
+          "id": "req-3",
+          "requirement": "Docker",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in Docker",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"Docker\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating Docker and document it in your portfolio."
+        },
+        {
+          "id": "req-4",
+          "requirement": "Git",
+          "type": "preferred",
+          "status": "partially_evidenced",
+          "jd_citation": "Target role requires proficiency in Git",
+          "resume_evidence": "Listed in skills section but lacks detailed project bullets.",
+          "explanation": "Recognized in resume, but lacks evidence of production use or tangible outcomes.",
+          "priority": "medium",
+          "actionable_guidance": "Add a specific achievement bullet describing how you applied Git."
+        }
+      ],
+      "ats_diagnostics": {
+        "overall_ats_score": 61,
+        "readability_score": 82,
+        "sections_detected": {
+          "contact": false,
+          "summary": false,
+          "experience": true,
+          "education": true,
+          "skills": true,
+          "projects": true
+        },
+        "file_format_health": {
+          "status": "pass",
+          "message": "Standard document formatting recognized by common ATS scanners."
+        },
+        "keyword_insights": {
+          "matched_keywords": [
+            "Git"
+          ],
+          "missing_critical_keywords": [
+            "Python",
+            "REST APIs",
+            "Docker"
+          ],
+          "recommended_context_keywords": [
+            "System Architecture",
+            "Agile / Scrum",
+            "CI/CD Pipelines"
+          ]
+        },
+        "formatting_issues": [
+          {
+            "id": "issue-1",
+            "category": "keywords",
+            "issue": "Critical target keywords missing: Python, REST APIs, Docker",
+            "severity": "critical",
+            "fix": "Incorporate these skills into your learning roadmap and resume once verified."
+          },
+          {
+            "id": "issue-2",
+            "category": "structure",
+            "issue": "Professional summary is absent or very brief",
+            "severity": "moderate",
+            "fix": "Include a 2-3 sentence summary defining your core stack and target engineering focus."
+          },
+          {
+            "id": "issue-3",
+            "category": "formatting",
+            "issue": "Use standard bullet action verbs and measurable outcomes (XYZ formula)",
+            "severity": "tip",
+            "fix": "Revise bullets using: Accomplished [X], as measured by [Y], by doing [Z]."
+          }
+        ],
+        "actionable_summary": "Your resume demonstrates good structure. Closing 3 gap(s) will significantly improve recruiter alignment."
+      }
+    },
+    "analysis-1795152620564": {
+      "id": "analysis-1795152620564",
+      "resume_id": "res-1795152620564",
+      "job_target_id": "jd-1795152620564",
+      "role_title": "AI Engineer Intern",
+      "target_company": "NeuralForge AI",
+      "created_at": "2026-11-20T05:30:20.564Z",
+      "status": "completed",
+      "is_ai_powered": false,
+      "parsed_resume": {
+        "contact": {
+          "name": "HARSHIT KHATRI",
+          "email": "harshitkhatri2006@gmail.com",
+          "phone": "+91 7415858854",
+          "github": "https://github.com/harshitkhatri29",
+          "linkedin": "https://linkedin.com/in/harshit-khatri-7866843b",
+          "location": "Remote / Available"
+        },
+        "summary": "Third-year B.Tech CSE student at Bennett University (CGPA 8.66) focused on Software Engineering, AI Engineering, and Full-Stack Development. Hands-on experience building RAG/LLM applications, responsive web products, REST APIs, and real-world client websites. Strong foundation in DSA, OOP, and problem solving.",
+        "skills": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "Tailwind CSS",
+          "Python",
+          "REST APIs",
+          "Git"
+        ],
+        "experience": [
+          {
+            "role": "BuildIt",
+            "company": "Intern",
+            "duration": "Startup",
+            "bullets": [
+              "Contributed in a collaborative startup environment, working with team members on assigned tasks and gaining practical exposure to professional software and fast-paced workflows."
+            ]
+          }
+        ],
+        "education": [
+          {
+            "institution": "Bennett University — B.Tech, Computer Science & Engineering | Expected 2028 | CGPA: 8.66/10 | Class XII: 77% | Class X: 90%",
+            "degree": "Degree in Computer Science or Related Field",
+            "details": ""
+          }
+        ],
+        "projects": [
+          {
+            "name": "Technical Project Portfolio",
+            "description": "Web application and software tools showcasing full-stack capabilities and modern UI.",
+            "technologies": [
+              "React",
+              "Next.js",
+              "TypeScript",
+              "JavaScript"
+            ]
+          }
+        ],
+        "certifications": [],
+        "raw_text": "HARSHIT KHATRI\n\nSoftware Engineer | AI Engineer (Aspiring)\n\nDabra, Madhya Pradesh | +91 7415858854 | harshitkhatri2006@gmail.com | GitHub: github.com/harshitkhatri29 | LinkedIn: linkedin.com/in/harshit-khatri-7866843b/\n\nPROFESSIONAL SUMMARY\n\nThird-year B.Tech CSE student at Bennett University (CGPA 8.66) focused on Software Engineering, AI Engineering, and Full-Stack Development. Hands-on experience building RAG/LLM applications, responsive web products, REST APIs, and real-world client websites. Strong foundation in DSA, OOP, and problem solving.\n\nEDUCATION\n\nBennett University — B.Tech, Computer Science & Engineering | Expected 2028 | CGPA: 8.66/10 | Class XII: 77% | Class X: 90%\n\nTECHNICAL SKILLS\n\nLanguages: C++, Python, JavaScript, TypeScript  Web: React, Next.js, Tailwind CSS, HTML, CSS, Responsive Design  AI/LLM: RAG, LLM Applications, Prompt Engineering, Generative AI, AI Agents  AI Tools: Qdrant, Sentence Transformers, Whisper, Groq  Backend/Tools: REST APIs, Next.js API Routes, Resend, Git, GitHub, Vercel  \n\nEXPERIENCE\n\nBuildIt — Intern | Startup\n\n• Contributed in a collaborative startup environment, working with team members on assigned tasks and gaining practical exposure to professional software and fast-paced workflows.\n\nPROJECTS\n\nRAG-Based DSA YouTube Learning Assistant  |  Python, yt-dlp, Whisper, Sentence Transformers, Qdrant, Groq\n\n• Built a RAG application over a DSA YouTube playlist by scraping video content, generating searchable transcripts, chunking content, and creating vector embeddings.\n\n• Implemented semantic retrieval to identify the relevant video/lecture section for a requested DSA topic or problem, then used an LLM to explain the retrieved concept.\n\nAmit Jain Dental & Implant Care — Client Website  |  Next.js, React, TypeScript, Tailwind CSS, GSAP, Resend\n\n• Developed a responsive production-oriented website for a dentist, including dedicated treatment pages, interactive sections, navigation, animations, and mobile-friendly layouts.\n\n• Built an appointment/enquiry workflow with validation, Next.js API handling, and Resend email integration, translating real client requirements into a polished web product.\n\nPortfolio Chatbot — AI-Powered Personal Assistant  |  LLM, Prompt Engineering, Web Development\n\n• Built an AI chatbot integrated with a personal portfolio to answer questions about projects, skills, experience, and background using conversational LLM interactions.\n\nResume Parser — AI-Powered Resume Processing  |  AI, Document Processing, LLM Application\n\n• Developed an AI-assisted workflow to extract and organize candidate details, skills, education, and experience from unstructured resumes into structured information.\n\nUniPaper BU — Academic Resource Platform  |  Web Development\n\n• Built a student-focused platform for discovering and accessing Bennett University previous-year examination papers through an organized, responsive interface.\n\nKalavati Industries Website — Client Project  |  Web Development, Responsive Design\n\n• Developed a responsive business website for a real client, covering products, packaging, partnerships, business information, benefits, and contact details.\n\nLEADERSHIP & HACKATHON\n\nMinister of Operations — Student Cabinet | Coordinated student initiatives and collaborated across teams to execute activities and manage responsibilities.\n\nJunior Core Member — FullStack Club BU | Assisted with technical events, club activities, coordination, and team initiatives.\n\nHackAccino 2026 — CSI Bennett University | Secured 55th among 300+ teams; collaborated in a competitive, time-constrained environment to build and present a technical solution.\n\nQuestions or want to know more? Visit: https://hire-harshit.vercel.app/\n\n"
+      },
+      "parsed_jd": {
+        "title": "AI Engineer Intern",
+        "company": "NeuralForge AI",
+        "level": "Senior",
+        "responsibilities": [
+          "Design, develop, and implement machine learning models for real-world applications.",
+          "Build and optimize AI-powered applications using Python and modern AI frameworks.",
+          "Develop Retrieval-Augmented Generation (RAG) pipelines using LangChain and vector databases.",
+          "Work with Large Language Models (LLMs) and integrate APIs from providers such as OpenAI and Google Gemini.",
+          "Perform data preprocessing, feature engineering, and model evaluation."
+        ],
+        "required_skills": [
+          "Python",
+          "REST APIs",
+          "Docker"
+        ],
+        "preferred_skills": [
+          "Git"
+        ],
+        "qualifications": [
+          "Demonstrated experience with modern software engineering practices",
+          "Strong problem-solving and communication skills",
+          "Passion for building high-quality, performant software"
+        ],
+        "raw_text": "**About the Company:**\r\n\r\nNeuralForge AI is an innovative artificial intelligence startup developing intelligent automation solutions, generative AI applications, and machine learning products. We focus on building scalable AI systems that solve real-world business problems.\r\n\r\n**Role: AI Engineer Intern**\r\n\r\n**Responsibilities:**\r\n- Design, develop, and implement machine learning models for real-world applications.\r\n- Build and optimize AI-powered applications using Python and modern AI frameworks.\r\n- Develop Retrieval-Augmented Generation (RAG) pipelines using LangChain and vector databases.\r\n- Work with Large Language Models (LLMs) and integrate APIs from providers such as OpenAI and Google Gemini.\r\n- Perform data preprocessing, feature engineering, and model evaluation.\r\n- Build REST APIs to integrate AI models with web applications.\r\n- Experiment with prompt engineering, embeddings, and semantic search.\r\n- Collaborate with software engineers and product teams to deploy AI-powered solutions.\r\n- Debug, test, and optimize AI application performance.\r\n\r\n**Required Skills:**\r\n- Strong programming knowledge in Python.\r\n- Understanding of Machine Learning fundamentals and algorithms.\r\n- Knowledge of supervised and unsupervised learning.\r\n- Familiarity with NumPy, Pandas, and Scikit-learn.\r\n- Understanding of Deep Learning concepts and neural networks.\r\n- Knowledge of NLP, text embeddings, and transformers.\r\n- Familiarity with REST APIs and Git/GitHub.\r\n- Understanding of Data Structures, Algorithms, and OOP concepts.\r\n\r\n**Preferred Skills:**\r\n- Hands-on experience with LangChain or LlamaIndex.\r\n- Experience building RAG-based applications.\r\n- Familiarity with vector databases such as FAISS, ChromaDB, or Qdrant.\r\n- Knowledge of Hugging Face Transformers.\r\n- Experience working with LLM APIs and prompt engineering.\r\n- Basic understanding of Docker and cloud deployment.\r\n- Experience deploying AI applications using FastAPI or Flask.\r\n\r\n**Qualifications:**\r\n- Pursuing a Bachelor's or Master's degree in Computer Science, Artificial Intelligence, Data Science, or a related field.\r\n- 0–1 years of professional experience.\r\n- Academic projects, internships, or personal projects in AI/ML are desirable.\r\n- Strong analytical, problem-solving, and communication skills.\r\n\r\n**Seniority:** Entry Level / Internship\r\n\r\n**Location:** Bengaluru, India (Hybrid)\r\n\r\n**Duration:** 6 Months\r\n\r\n**Compensation:** ₹30,000–₹45,000 per month"
+      },
+      "readiness": {
+        "overall_score": 77,
+        "dimensions": {
+          "core_skills": 75,
+          "experience_relevance": 73,
+          "education_credentials": 88,
+          "ats_readability": 82
+        },
+        "summary": "Found 3 evidenced and 0 partially evidenced skills for AI Engineer Intern. Focus your learning on missing requirements (Docker)."
+      },
+      "requirement_matches": [
+        {
+          "id": "req-1",
+          "requirement": "Python",
+          "type": "required",
+          "status": "evidenced",
+          "jd_citation": "Target role requires proficiency in Python",
+          "resume_evidence": "Listed under Technical Skills and mentioned in project/experience descriptions.",
+          "explanation": "Demonstrated directly in your resume and aligns with JD specifications.",
+          "priority": "high",
+          "actionable_guidance": "Highlight quantifiable impact using Python in your experience bullets."
+        },
+        {
+          "id": "req-2",
+          "requirement": "REST APIs",
+          "type": "required",
+          "status": "evidenced",
+          "jd_citation": "Target role requires proficiency in REST APIs",
+          "resume_evidence": "Listed under Technical Skills and mentioned in project/experience descriptions.",
+          "explanation": "Demonstrated directly in your resume and aligns with JD specifications.",
+          "priority": "high",
+          "actionable_guidance": "Highlight quantifiable impact using REST APIs in your experience bullets."
+        },
+        {
+          "id": "req-3",
+          "requirement": "Docker",
+          "type": "required",
+          "status": "not_evidenced",
+          "jd_citation": "Target role requires proficiency in Docker",
+          "resume_evidence": "Not found in resume.",
+          "explanation": "Skill \"Docker\" was not evidenced in your uploaded resume.",
+          "priority": "high",
+          "actionable_guidance": "Build a hands-on project demonstrating Docker and document it in your portfolio."
+        },
+        {
+          "id": "req-4",
+          "requirement": "Git",
+          "type": "preferred",
+          "status": "evidenced",
+          "jd_citation": "Target role requires proficiency in Git",
+          "resume_evidence": "Listed under Technical Skills and mentioned in project/experience descriptions.",
+          "explanation": "Demonstrated directly in your resume and aligns with JD specifications.",
+          "priority": "medium",
+          "actionable_guidance": "Highlight quantifiable impact using Git in your experience bullets."
+        }
+      ],
+      "ats_diagnostics": {
+        "overall_ats_score": 79,
+        "readability_score": 82,
+        "sections_detected": {
+          "contact": true,
+          "summary": true,
+          "experience": true,
+          "education": true,
+          "skills": true,
+          "projects": true
+        },
+        "file_format_health": {
+          "status": "pass",
+          "message": "Standard document formatting recognized by common ATS scanners."
+        },
+        "keyword_insights": {
+          "matched_keywords": [
+            "Python",
+            "REST APIs",
+            "Git"
+          ],
+          "missing_critical_keywords": [
+            "Docker"
+          ],
+          "recommended_context_keywords": [
+            "System Architecture",
+            "Agile / Scrum",
+            "CI/CD Pipelines"
+          ]
+        },
+        "formatting_issues": [
+          {
+            "id": "issue-1",
+            "category": "keywords",
+            "issue": "Critical target keywords missing: Docker",
+            "severity": "critical",
+            "fix": "Incorporate these skills into your learning roadmap and resume once verified."
+          },
+          {
+            "id": "issue-3",
+            "category": "formatting",
+            "issue": "Use standard bullet action verbs and measurable outcomes (XYZ formula)",
+            "severity": "tip",
+            "fix": "Revise bullets using: Accomplished [X], as measured by [Y], by doing [Z]."
+          }
+        ],
+        "actionable_summary": "Your resume demonstrates good structure. Closing 1 gap(s) will significantly improve recruiter alignment."
+      }
+    }
+  },
+  "roadmaps": {
+    "demo-analysis-1": {
+      "id": "roadmap-demo-1",
+      "analysis_id": "demo-analysis-1",
+      "role_title": "Frontend Engineer",
+      "target_company": "Vercel / TechCorp",
+      "weekly_hours": 8,
+      "created_at": "2026-11-18T03:23:49.076Z",
+      "milestones": [
+        {
+          "id": "ms-1",
+          "skill": "TypeScript for React Developers",
+          "title": "Master Strict TypeScript in React Applications",
+          "priority": "high",
+          "target_week": 1,
+          "estimated_hours": 10,
+          "tasks": [
+            {
+              "id": "t-1-1",
+              "title": "Learn Generics, Utility Types, and Strict Typing",
+              "description": "Review Partial, Pick, Omit, Record, and typing React Props, Event Handlers, and custom Hooks.",
+              "type": "learning",
+              "estimated_hours": 3,
+              "completed": true,
+              "completed_at": "2026-11-19T03:23:49.076Z",
+              "evidence_notes": "Completed Total TypeScript beginner tutorial and typed custom useFetch hook.",
+              "search_query": "Total TypeScript beginner tutorial and React TypeScript cheat sheet"
+            },
+            {
+              "id": "t-1-2",
+              "title": "Migrate DevBoard Project from JS to Strict TypeScript",
+              "description": "Add tsconfig.json with strict: true. Convert all .jsx files to .tsx without using \"any\".",
+              "type": "practice_exercise",
+              "estimated_hours": 4,
+              "completed": true,
+              "completed_at": "2026-11-19T15:23:49.076Z",
+              "evidence_url": "https://github.com/alexchen-dev/devboard/tree/ts-migration",
+              "evidence_notes": "Created PR #4 migrating 14 components to .tsx with zero type errors.",
+              "search_query": "Migrating React create-react-app or Vite project to TypeScript step by step"
+            },
+            {
+              "id": "t-1-3",
+              "title": "Update Resume Skills Section with TypeScript",
+              "description": "Truthfully list TypeScript under your technical skills now that you have demonstrable project code.",
+              "type": "resume_update",
+              "estimated_hours": 1,
+              "completed": false,
+              "search_query": "How to list TypeScript on frontend resume truthfully"
+            }
+          ]
+        },
+        {
+          "id": "ms-2",
+          "skill": "Next.js App Router",
+          "title": "Build Fullstack React App with Next.js 14 App Router",
+          "priority": "high",
+          "target_week": 2,
+          "estimated_hours": 12,
+          "tasks": [
+            {
+              "id": "t-2-1",
+              "title": "Understand Server Components vs Client Components",
+              "description": "Learn Server-Side Rendering (SSR), Static Site Generation (SSG), Suspense streaming, and Server Actions.",
+              "type": "learning",
+              "estimated_hours": 4,
+              "completed": false,
+              "search_query": "Next.js official documentation learn App Router server components"
+            },
+            {
+              "id": "t-2-2",
+              "title": "Deliver a Portfolio Fullstack App on Vercel",
+              "description": "Create a responsive web app with Route Handlers, metadata for SEO, and dynamic routes. Deploy live.",
+              "type": "portfolio_deliverable",
+              "estimated_hours": 6,
+              "completed": false,
+              "search_query": "Next.js 14 tutorial fullstack project deployed to Vercel"
+            },
+            {
+              "id": "t-2-3",
+              "title": "Document Project on GitHub with Architecture Diagram",
+              "description": "Write a comprehensive README explaining technical decisions, SSR benefits, and Lighthouse score.",
+              "type": "practice_exercise",
+              "estimated_hours": 2,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "id": "ms-3",
+          "skill": "Automated Testing",
+          "title": "Implement Jest and React Testing Library Component Tests",
+          "priority": "medium",
+          "target_week": 3,
+          "estimated_hours": 8,
+          "tasks": [
+            {
+              "id": "t-3-1",
+              "title": "Write Unit Tests for User Interactions and Accessibility",
+              "description": "Test button clicks, form submissions, and accessible role queries (getByRole).",
+              "type": "practice_exercise",
+              "estimated_hours": 4,
+              "completed": false,
+              "search_query": "Testing JavaScript applications React Testing Library best practices"
+            },
+            {
+              "id": "t-3-2",
+              "title": "Set Up GitHub Actions CI to Run Tests on Pull Requests",
+              "description": "Create a simple .github/workflows/ci.yml pipeline that runs npm test on every push.",
+              "type": "portfolio_deliverable",
+              "estimated_hours": 3,
+              "completed": false
+            }
+          ]
+        }
+      ]
+    },
+    "analysis-1795145032905": {
+      "id": "roadmap-1795145033163",
+      "analysis_id": "analysis-1795145032905",
+      "role_title": "Software Development Engineer Intern",
+      "target_company": "Nexora Technologies",
+      "weekly_hours": 8,
+      "created_at": "2026-11-20T03:23:53.163Z",
+      "milestones": [
+        {
+          "id": "ms-1",
+          "skill": "React",
+          "title": "Master React for Software Development Engineer Intern",
+          "priority": "high",
+          "target_week": 1,
+          "estimated_hours": 8,
+          "tasks": [
+            {
+              "id": "t-1-1",
+              "title": "Core Fundamentals & Best Practices in React",
+              "description": "Study core documentation, architectural patterns, and syntax conventions.",
+              "type": "learning",
+              "estimated_hours": 3,
+              "completed": false,
+              "search_query": "React official docs and best practices guide"
+            },
+            {
+              "id": "t-1-2",
+              "title": "Build Hands-On Feature with React",
+              "description": "Develop a focused code repository or interactive feature integrating React.",
+              "type": "portfolio_deliverable",
+              "estimated_hours": 4,
+              "completed": false,
+              "search_query": "React beginner project tutorial github"
+            },
+            {
+              "id": "t-1-3",
+              "title": "Document Deliverable & Update Resume",
+              "description": "Add the completed repository link to your GitHub and truthfully integrate the skill into your project bullets.",
+              "type": "resume_update",
+              "estimated_hours": 2,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "id": "ms-2",
+          "skill": "Next.js",
+          "title": "Master Next.js for Software Development Engineer Intern",
+          "priority": "high",
+          "target_week": 2,
+          "estimated_hours": 8,
+          "tasks": [
+            {
+              "id": "t-2-1",
+              "title": "Core Fundamentals & Best Practices in Next.js",
+              "description": "Study core documentation, architectural patterns, and syntax conventions.",
+              "type": "learning",
+              "estimated_hours": 3,
+              "completed": false,
+              "search_query": "Next.js official docs and best practices guide"
+            },
+            {
+              "id": "t-2-2",
+              "title": "Build Hands-On Feature with Next.js",
+              "description": "Develop a focused code repository or interactive feature integrating Next.js.",
+              "type": "portfolio_deliverable",
+              "estimated_hours": 4,
+              "completed": false,
+              "search_query": "Next.js beginner project tutorial github"
+            },
+            {
+              "id": "t-2-3",
+              "title": "Document Deliverable & Update Resume",
+              "description": "Add the completed repository link to your GitHub and truthfully integrate the skill into your project bullets.",
+              "type": "resume_update",
+              "estimated_hours": 2,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "id": "ms-3",
+          "skill": "TypeScript",
+          "title": "Master TypeScript for Software Development Engineer Intern",
+          "priority": "high",
+          "target_week": 3,
+          "estimated_hours": 8,
+          "tasks": [
+            {
+              "id": "t-3-1",
+              "title": "Core Fundamentals & Best Practices in TypeScript",
+              "description": "Study core documentation, architectural patterns, and syntax conventions.",
+              "type": "learning",
+              "estimated_hours": 3,
+              "completed": false,
+              "search_query": "TypeScript official docs and best practices guide"
+            },
+            {
+              "id": "t-3-2",
+              "title": "Build Hands-On Feature with TypeScript",
+              "description": "Develop a focused code repository or interactive feature integrating TypeScript.",
+              "type": "portfolio_deliverable",
+              "estimated_hours": 4,
+              "completed": false,
+              "search_query": "TypeScript beginner project tutorial github"
+            },
+            {
+              "id": "t-3-3",
+              "title": "Document Deliverable & Update Resume",
+              "description": "Add the completed repository link to your GitHub and truthfully integrate the skill into your project bullets.",
+              "type": "resume_update",
+              "estimated_hours": 2,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "id": "ms-4",
+          "skill": "JavaScript",
+          "title": "Master JavaScript for Software Development Engineer Intern",
+          "priority": "high",
+          "target_week": 4,
+          "estimated_hours": 8,
+          "tasks": [
+            {
+              "id": "t-4-1",
+              "title": "Core Fundamentals & Best Practices in JavaScript",
+              "description": "Study core documentation, architectural patterns, and syntax conventions.",
+              "type": "learning",
+              "estimated_hours": 3,
+              "completed": false,
+              "search_query": "JavaScript official docs and best practices guide"
+            },
+            {
+              "id": "t-4-2",
+              "title": "Build Hands-On Feature with JavaScript",
+              "description": "Develop a focused code repository or interactive feature integrating JavaScript.",
+              "type": "portfolio_deliverable",
+              "estimated_hours": 4,
+              "completed": false,
+              "search_query": "JavaScript beginner project tutorial github"
+            },
+            {
+              "id": "t-4-3",
+              "title": "Document Deliverable & Update Resume",
+              "description": "Add the completed repository link to your GitHub and truthfully integrate the skill into your project bullets.",
+              "type": "resume_update",
+              "estimated_hours": 2,
+              "completed": false
+            }
+          ]
+        }
+      ]
+    },
+    "analysis-1795145128431": {
+      "id": "roadmap-1795145166465",
+      "analysis_id": "analysis-1795145128431",
+      "role_title": "AI Engineer Intern",
+      "target_company": "NeuralForge AI",
+      "weekly_hours": 15,
+      "created_at": "2026-11-20T03:26:06.465Z",
+      "milestones": [
+        {
+          "id": "ms-1",
+          "skill": "Python",
+          "title": "Master Python for AI Engineer Intern",
+          "priority": "high",
+          "target_week": 1,
+          "estimated_hours": 15,
+          "tasks": [
+            {
+              "id": "t-1-1",
+              "title": "Core Fundamentals & Best Practices in Python",
+              "description": "Study core documentation, architectural patterns, and syntax conventions.",
+              "type": "learning",
+              "estimated_hours": 5,
+              "completed": false,
+              "search_query": "Python official docs and best practices guide"
+            },
+            {
+              "id": "t-1-2",
+              "title": "Build Hands-On Feature with Python",
+              "description": "Develop a focused code repository or interactive feature integrating Python.",
+              "type": "portfolio_deliverable",
+              "estimated_hours": 7,
+              "completed": false,
+              "search_query": "Python beginner project tutorial github"
+            },
+            {
+              "id": "t-1-3",
+              "title": "Document Deliverable & Update Resume",
+              "description": "Add the completed repository link to your GitHub and truthfully integrate the skill into your project bullets.",
+              "type": "resume_update",
+              "estimated_hours": 3,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "id": "ms-2",
+          "skill": "REST APIs",
+          "title": "Master REST APIs for AI Engineer Intern",
+          "priority": "high",
+          "target_week": 2,
+          "estimated_hours": 15,
+          "tasks": [
+            {
+              "id": "t-2-1",
+              "title": "Core Fundamentals & Best Practices in REST APIs",
+              "description": "Study core documentation, architectural patterns, and syntax conventions.",
+              "type": "learning",
+              "estimated_hours": 5,
+              "completed": false,
+              "search_query": "REST APIs official docs and best practices guide"
+            },
+            {
+              "id": "t-2-2",
+              "title": "Build Hands-On Feature with REST APIs",
+              "description": "Develop a focused code repository or interactive feature integrating REST APIs.",
+              "type": "portfolio_deliverable",
+              "estimated_hours": 7,
+              "completed": false,
+              "search_query": "REST APIs beginner project tutorial github"
+            },
+            {
+              "id": "t-2-3",
+              "title": "Document Deliverable & Update Resume",
+              "description": "Add the completed repository link to your GitHub and truthfully integrate the skill into your project bullets.",
+              "type": "resume_update",
+              "estimated_hours": 3,
+              "completed": false
+            }
+          ]
+        },
+        {
+          "id": "ms-3",
+          "skill": "Docker",
+          "title": "Master Docker for AI Engineer Intern",
+          "priority": "high",
+          "target_week": 3,
+          "estimated_hours": 15,
+          "tasks": [
+            {
+              "id": "t-3-1",
+              "title": "Core Fundamentals & Best Practices in Docker",
+              "description": "Study core documentation, architectural patterns, and syntax conventions.",
+              "type": "learning",
+              "estimated_hours": 5,
+              "completed": true,
+              "search_query": "Docker official docs and best practices guide",
+              "completed_at": "2026-11-20T05:33:03.319Z"
+            },
+            {
+              "id": "t-3-2",
+              "title": "Build Hands-On Feature with Docker",
+              "description": "Develop a focused code repository or interactive feature integrating Docker.",
+              "type": "portfolio_deliverable",
+              "estimated_hours": 7,
+              "completed": true,
+              "search_query": "Docker beginner project tutorial github",
+              "completed_at": "2026-11-20T05:33:04.054Z"
+            },
+            {
+              "id": "t-3-3",
+              "title": "Document Deliverable & Update Resume",
+              "description": "Add the completed repository link to your GitHub and truthfully integrate the skill into your project bullets.",
+              "type": "resume_update",
+              "estimated_hours": 3,
+              "completed": true,
+              "completed_at": "2026-11-20T05:33:04.753Z"
+            }
+          ]
+        },
+        {
+          "id": "ms-4",
+          "skill": "Git",
+          "title": "Master Git for AI Engineer Intern",
+          "priority": "medium",
+          "target_week": 4,
+          "estimated_hours": 15,
+          "tasks": [
+            {
+              "id": "t-4-1",
+              "title": "Core Fundamentals & Best Practices in Git",
+              "description": "Study core documentation, architectural patterns, and syntax conventions.",
+              "type": "learning",
+              "estimated_hours": 5,
+              "completed": false,
+              "search_query": "Git official docs and best practices guide"
+            },
+            {
+              "id": "t-4-2",
+              "title": "Build Hands-On Feature with Git",
+              "description": "Develop a focused code repository or interactive feature integrating Git.",
+              "type": "portfolio_deliverable",
+              "estimated_hours": 7,
+              "completed": false,
+              "search_query": "Git beginner project tutorial github"
+            },
+            {
+              "id": "t-4-3",
+              "title": "Document Deliverable & Update Resume",
+              "description": "Add the completed repository link to your GitHub and truthfully integrate the skill into your project bullets.",
+              "type": "resume_update",
+              "estimated_hours": 3,
+              "completed": false
+            }
+          ]
+        }
+      ]
+    },
+    "analysis-1795152620564": {
+      "id": "roadmap-1795152621283",
+      "analysis_id": "analysis-1795152620564",
+      "role_title": "AI Engineer Intern",
+      "target_company": "NeuralForge AI",
+      "weekly_hours": 8,
+      "created_at": "2026-11-20T05:30:21.283Z",
+      "milestones": [
+        {
+          "id": "ms-1",
+          "skill": "Docker",
+          "title": "Master Docker for AI Engineer Intern",
+          "priority": "high",
+          "target_week": 1,
+          "estimated_hours": 8,
+          "tasks": [
+            {
+              "id": "t-1-1",
+              "title": "Core Fundamentals & Best Practices in Docker",
+              "description": "Study core documentation, architectural patterns, and syntax conventions.",
+              "type": "learning",
+              "estimated_hours": 3,
+              "completed": true,
+              "search_query": "Docker official docs and best practices guide",
+              "completed_at": "2026-11-20T05:32:44.591Z"
+            },
+            {
+              "id": "t-1-2",
+              "title": "Build Hands-On Feature with Docker",
+              "description": "Develop a focused code repository or interactive feature integrating Docker.",
+              "type": "portfolio_deliverable",
+              "estimated_hours": 4,
+              "completed": true,
+              "search_query": "Docker beginner project tutorial github",
+              "completed_at": "2026-11-20T05:32:45.869Z"
+            },
+            {
+              "id": "t-1-3",
+              "title": "Document Deliverable & Update Resume",
+              "description": "Add the completed repository link to your GitHub and truthfully integrate the skill into your project bullets.",
+              "type": "resume_update",
+              "estimated_hours": 2,
+              "completed": true,
+              "completed_at": "2026-11-20T05:32:48.581Z"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "revisions": {
+    "demo-analysis-1": {
+      "id": "rev-demo-1",
+      "analysis_id": "demo-analysis-1",
+      "resume_id": "resume-demo-1",
+      "created_at": "2026-11-18T03:23:49.076Z",
+      "updated_at": "2026-11-19T15:23:49.076Z",
+      "suggestions": [
+        {
+          "id": "sug-1",
+          "section": "summary",
+          "original_text": "Passionate Junior Frontend Developer with 1.5 years experience building accessible, responsive web applications using React, JavaScript, and Tailwind CSS. Eager to deepen TypeScript and Next.js expertise.",
+          "proposed_text": "Results-driven Frontend Developer with 1.5+ years building accessible, high-performance web applications using React, TypeScript, and Tailwind CSS. Proven track record of improving web performance and shipping responsive UI components.",
+          "grounded_reason": "Replaces passive \"eager to deepen\" with active phrasing while reflecting your active TypeScript learning without fabricating past employment titles.",
+          "status": "accepted"
+        },
+        {
+          "id": "sug-2",
+          "section": "experience",
+          "original_text": "Built reusable React components for 4 client websites, improving page load speed by 28%",
+          "proposed_text": "Architected reusable, modular React component library for 4 client web apps, reducing page load latency by 28% and boosting Lighthouse performance scores.",
+          "grounded_reason": "Adds structural technical terms (\"architected modular component library\", \"Lighthouse scores\") that match the JD wording while preserving truthful historical metrics.",
+          "status": "accepted"
+        },
+        {
+          "id": "sug-3",
+          "section": "experience",
+          "original_text": "Implemented client-side form validation and integrated RESTful backend APIs",
+          "proposed_text": "Engineered robust client-side form workflows with asynchronous validation, integrating secure RESTful backend endpoints with comprehensive error-handling states.",
+          "grounded_reason": "Clarifies engineering depth around API integration and error handling, directly answering the JD requirement for production-grade REST communication.",
+          "status": "pending"
+        },
+        {
+          "id": "sug-4",
+          "section": "projects",
+          "original_text": "Interactive drag-and-drop task dashboard built with React and LocalStorage persistence.",
+          "proposed_text": "Engineered DevBoard: Full-typed Kanban task dashboard featuring strict TypeScript, React, Tailwind CSS, and resilient browser state synchronization.",
+          "grounded_reason": "Incorporates newly completed TypeScript migration from Milestone 1 of your roadmap.",
+          "status": "pending"
+        }
+      ]
+    },
+    "analysis-1795145032905": {
+      "id": "rev-1795145033826",
+      "analysis_id": "analysis-1795145032905",
+      "resume_id": "res-1795145032905",
+      "created_at": "2026-11-20T03:23:53.826Z",
+      "updated_at": "2026-11-20T03:23:53.826Z",
+      "suggestions": [
+        {
+          "id": "sug-3",
+          "section": "projects",
+          "original_text": "Web application and software tools showcasing full-stack capabilities and modern UI.",
+          "proposed_text": "Engineered Technical Project Portfolio: Production-ready application developed with , demonstrating modular state management, responsive UI, and clean API integration.",
+          "grounded_reason": "Structures project description around architectural principles and tangible deliverables.",
+          "status": "pending"
+        }
+      ]
+    },
+    "analysis-1795145128431": {
+      "id": "rev-1795145129349",
+      "analysis_id": "analysis-1795145128431",
+      "resume_id": "res-1795145128431",
+      "created_at": "2026-11-20T03:25:29.349Z",
+      "updated_at": "2026-11-20T03:26:41.380Z",
+      "suggestions": [
+        {
+          "id": "sug-3",
+          "section": "projects",
+          "original_text": "Web application and software tools showcasing full-stack capabilities and modern UI.",
+          "proposed_text": "Engineered Technical Project Portfolio: Production-ready application developed with , demonstrating modular state management, responsive UI, and clean API integration.",
+          "grounded_reason": "Structures project description around architectural principles and tangible deliverables.",
+          "status": "accepted"
+        }
+      ]
+    },
+    "analysis-1795152620564": {
+      "id": "rev-1795152621632",
+      "analysis_id": "analysis-1795152620564",
+      "resume_id": "res-1795152620564",
+      "created_at": "2026-11-20T05:30:21.632Z",
+      "updated_at": "2026-11-20T05:30:21.632Z",
+      "suggestions": [
+        {
+          "id": "sug-1",
+          "section": "summary",
+          "original_text": "Third-year B.Tech CSE student at Bennett University (CGPA 8.66) focused on Software Engineering, AI Engineering, and Full-Stack Development. Hands-on experience building RAG/LLM applications, responsive web products, REST APIs, and real-world client websites. Strong foundation in DSA, OOP, and problem solving.",
+          "proposed_text": "Results-focused AI Engineer Intern candidate with proven experience across React, Next.js, TypeScript, JavaScript. Committed to building responsive, accessible applications and engineering high-quality user experiences.",
+          "grounded_reason": "Reframes summary to proactively mirror target role title and highlight evidenced core stack without exaggerating experience level.",
+          "status": "pending"
+        },
+        {
+          "id": "sug-2",
+          "section": "experience",
+          "original_text": "Contributed in a collaborative startup environment, working with team members on assigned tasks and gaining practical exposure to professional software and fast-paced workflows.",
+          "proposed_text": "Architected and shipped modular components utilizing React and Next.js, resulting in measurable performance gains and clean maintainability.",
+          "grounded_reason": "Strengthens opening verb from general wording to \"Architected and shipped\", aligning with standard engineering evaluation rubrics.",
+          "status": "pending"
+        },
+        {
+          "id": "sug-3",
+          "section": "projects",
+          "original_text": "Web application and software tools showcasing full-stack capabilities and modern UI.",
+          "proposed_text": "Engineered Technical Project Portfolio: Production-ready application developed with React, Next.js, TypeScript, JavaScript, demonstrating modular state management, responsive UI, and clean API integration.",
+          "grounded_reason": "Structures project description around architectural principles and tangible deliverables.",
+          "status": "pending"
+        }
+      ]
+    }
+  }
+}
