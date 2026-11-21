@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b-2 border-slate-900/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        
+
         {/* Brand Logo with Roblox-style chunky block */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="w-11 h-11 rounded-xl bg-primary border-2 border-navy flex items-center justify-center text-white shadow-chunky-sm group-hover:rotate-6 transition-transform">
@@ -52,11 +52,10 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${
-                  isActive
-                    ? 'bg-white text-navy shadow-sm border border-slate-200'
-                    : 'text-navy-muted hover:text-navy hover:bg-white/50'
-                }`}
+                className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${isActive
+                  ? 'bg-white text-navy shadow-sm border border-slate-200'
+                  : 'text-navy-muted hover:text-navy hover:bg-white/50'
+                  }`}
               >
                 {link.label}
               </Link>
