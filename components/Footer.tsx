@@ -12,7 +12,7 @@ export default function Footer() {
               <Sparkles className="w-5 h-5 fill-white" />
             </div>
             <div>
-              <span className="font-extrabold text-lg tracking-tight text-navy">Resume Ready</span>
+              <span className="font-extrabold text-lg tracking-tight text-navy">Skill Bridge</span>
               <p className="text-xs text-navy-muted">Explainable career readiness & grounded roadmaps</p>
             </div>
           </div>

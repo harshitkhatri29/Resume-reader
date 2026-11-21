@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Resume Ready — AI-Powered Career Readiness & Roadmaps',
+  title: 'Skill Bridge — AI-Powered Career Readiness & Roadmaps',
   description: 'Convert your resume and target job description into a clear readiness assessment, actionable skill roadmap, truthful ATS improvements, and measurable learning progress.',
 };
 

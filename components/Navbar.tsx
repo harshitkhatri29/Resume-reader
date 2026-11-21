@@ -35,7 +35,7 @@ export default function Navbar() {
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-xl tracking-tight text-navy">Resume Ready</span>
+              <span className="font-extrabold text-xl tracking-tight text-navy">Skill Bridge</span>
               <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-peach border border-navy/20 text-navy">
                 MVP
               </span>
@@ -133,7 +133,7 @@ export default function Navbar() {
               <p>
                 {geminiActive
                   ? 'Your Gemini API key is configured. Analyses and roadmaps use Google Gemini generative responses with strict JSON schema validation.'
-                  : 'Resume Ready is currently running in zero-setup mode using our deterministic parsing and matching engine. All features (ATS scoring, gap analysis, roadmaps, and resume studio) work immediately!'}
+                  : 'Skill Bridge is currently running in zero-setup mode using our deterministic parsing and matching engine. All features (ATS scoring, gap analysis, roadmaps, and resume studio) work immediately!'}
               </p>
 
               {!geminiActive && (

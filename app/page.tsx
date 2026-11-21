@@ -40,7 +40,7 @@ export default function HomePage() {
 
         {/* Subtitle */}
         <p className="text-lg sm:text-xl text-navy-muted max-w-2xl mx-auto leading-relaxed font-medium">
-          Resume Ready turns your resume and target job description into an explainable readiness assessment,
+          Skill Bridge turns your resume and target job description into an explainable readiness assessment,
           prioritized learning roadmap, and truthful ATS optimization.
         </p>
 
