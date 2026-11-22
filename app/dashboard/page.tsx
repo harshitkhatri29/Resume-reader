@@ -19,6 +19,7 @@ import {
   Zap,
   Target
 } from 'lucide-react';
+import { getAllLocalAnalyses, deleteLocalAnalysis } from '@/lib/clientStorage';
 
 export default function DashboardPage() {
   const [analyses, setAnalyses] = useState<Analysis[]>([]);
@@ -29,21 +30,32 @@ export default function DashboardPage() {
   const loadData = async () => {
     try {
       const [analysesRes, summaryRes] = await Promise.all([
-        fetch('/api/analyses'),
-        fetch('/api/dashboard')
+        fetch('/api/analyses').catch(() => null),
+        fetch('/api/dashboard').catch(() => null)
       ]);
 
-      if (analysesRes.ok) {
-        const analysesData = await analysesRes.json();
-        setAnalyses(analysesData);
+      let serverAnalyses: Analysis[] = [];
+      if (analysesRes && analysesRes.ok) {
+        serverAnalyses = await analysesRes.json();
       }
 
-      if (summaryRes.ok) {
+      const localList = getAllLocalAnalyses();
+      const map = new Map<string, Analysis>();
+      serverAnalyses.forEach(a => map.set(a.id, a));
+      localList.forEach(a => map.set(a.id, a));
+
+      const combined = Array.from(map.values()).sort(
+        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+      setAnalyses(combined);
+
+      if (summaryRes && summaryRes.ok) {
         const summaryData = await summaryRes.json();
         setSummary(summaryData);
       }
     } catch (err) {
       console.error('Failed to load dashboard data:', err);
+      setAnalyses(getAllLocalAnalyses());
     } finally {
       setLoading(false);
     }
@@ -61,14 +73,13 @@ export default function DashboardPage() {
       return;
     }
 
+    deleteLocalAnalysis(id);
     try {
-      const res = await fetch(`/api/analyses/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        loadData();
-      }
+      await fetch(`/api/analyses/${id}`, { method: 'DELETE' });
     } catch (err) {
-      console.error('Failed to delete analysis:', err);
+      console.error('Failed to delete analysis on server:', err);
     }
+    loadData();
   };
 
   if (loading) {
@@ -82,7 +93,7 @@ export default function DashboardPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      
+
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>

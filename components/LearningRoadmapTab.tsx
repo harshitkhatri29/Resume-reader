@@ -56,6 +56,14 @@ export default function LearningRoadmapTab({ roadmap, onRoadmapUpdate }: Learnin
       triggerCelebration();
     }
 
+    // Optimistic local update
+    const updatedMilestones = roadmap.milestones.map(m => ({
+      ...m,
+      tasks: m.tasks.map(t => t.id === task.id ? { ...t, completed: newCompleted } : t)
+    }));
+    const updatedRoadmap = { ...roadmap, milestones: updatedMilestones };
+    onRoadmapUpdate(updatedRoadmap);
+
     try {
       const res = await fetch(`/api/roadmaps/${roadmap.id}/tasks/${task.id}`, {
         method: 'PATCH',
@@ -65,32 +73,43 @@ export default function LearningRoadmapTab({ roadmap, onRoadmapUpdate }: Learnin
 
       if (res.ok) {
         const data = await res.json();
-        onRoadmapUpdate(data.roadmap);
+        if (data.roadmap) onRoadmapUpdate(data.roadmap);
       }
     } catch (err) {
-      console.error('Failed to toggle task:', err);
+      console.error('Failed to toggle task on server:', err);
     }
   };
 
   const handleSaveEvidence = async (task: RoadmapTask) => {
     setSavingEvidence(task.id);
+    const newNotes = evidenceNotes[task.id] ?? task.evidence_notes;
+    const newUrl = evidenceUrls[task.id] ?? task.evidence_url;
+
+    // Optimistic local update
+    const updatedMilestones = roadmap.milestones.map(m => ({
+      ...m,
+      tasks: m.tasks.map(t => t.id === task.id ? { ...t, evidence_notes: newNotes, evidence_url: newUrl } : t)
+    }));
+    const updatedRoadmap = { ...roadmap, milestones: updatedMilestones };
+    onRoadmapUpdate(updatedRoadmap);
+    setExpandedTask(null);
+
     try {
       const res = await fetch(`/api/roadmaps/${roadmap.id}/tasks/${task.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          evidence_notes: evidenceNotes[task.id] ?? task.evidence_notes,
-          evidence_url: evidenceUrls[task.id] ?? task.evidence_url
+          evidence_notes: newNotes,
+          evidence_url: newUrl
         })
       });
 
       if (res.ok) {
         const data = await res.json();
-        onRoadmapUpdate(data.roadmap);
-        setExpandedTask(null);
+        if (data.roadmap) onRoadmapUpdate(data.roadmap);
       }
     } catch (err) {
-      console.error('Failed to save evidence:', err);
+      console.error('Failed to save evidence on server:', err);
     } finally {
       setSavingEvidence(null);
     }
@@ -190,28 +209,25 @@ export default function LearningRoadmapTab({ roadmap, onRoadmapUpdate }: Learnin
           return (
             <div
               key={milestone.id}
-              className={`card-playful p-6 space-y-4 border-2 transition-all ${
-                isAllDone
+              className={`card-playful p-6 space-y-4 border-2 transition-all ${isAllDone
                   ? 'border-emerald-300 bg-emerald-50/20'
                   : 'border-slate-900/10 hover:border-slate-900/20'
-              }`}
+                }`}
             >
               {/* Milestone Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
                 <div className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-xl font-extrabold text-xs flex items-center justify-center border ${
-                    isAllDone
+                  <div className={`w-8 h-8 rounded-xl font-extrabold text-xs flex items-center justify-center border ${isAllDone
                       ? 'bg-emerald-500 text-white border-emerald-600'
                       : 'bg-primary-light text-primary border-primary/20'
-                  }`}>
+                    }`}>
                     W{milestone.target_week}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
                       <h3 className="font-extrabold text-base text-navy">{milestone.title}</h3>
-                      <span className={`text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-md ${
-                        milestone.priority === 'high' ? 'bg-red-50 text-red-700' : 'bg-slate-100 text-slate-600'
-                      }`}>
+                      <span className={`text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-md ${milestone.priority === 'high' ? 'bg-red-50 text-red-700' : 'bg-slate-100 text-slate-600'
+                        }`}>
                         {milestone.priority}
                       </span>
                     </div>
@@ -237,21 +253,19 @@ export default function LearningRoadmapTab({ roadmap, onRoadmapUpdate }: Learnin
                   return (
                     <div
                       key={task.id}
-                      className={`p-4 rounded-xl border-2 transition-all ${
-                        task.completed
+                      className={`p-4 rounded-xl border-2 transition-all ${task.completed
                           ? 'bg-slate-50 border-slate-200 text-slate-500'
                           : 'bg-white border-slate-200 hover:border-slate-300'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-start gap-3">
                         <button
                           type="button"
                           onClick={() => handleToggleTask(milestone.id, task)}
-                          className={`mt-0.5 w-5 h-5 rounded-lg border-2 flex items-center justify-center transition-all ${
-                            task.completed
+                          className={`mt-0.5 w-5 h-5 rounded-lg border-2 flex items-center justify-center transition-all ${task.completed
                               ? 'bg-emerald-500 border-emerald-600 text-white shadow-sm'
                               : 'border-slate-300 hover:border-primary bg-white'
-                          }`}
+                            }`}
                         >
                           {task.completed && <CheckCircle2 className="w-4 h-4" />}
                         </button>

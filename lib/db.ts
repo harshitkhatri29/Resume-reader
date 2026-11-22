@@ -8,7 +8,13 @@ interface DatabaseSchema {
   revisions: Record<string, ResumeRevision>;
 }
 
-const DATA_DIR = path.join(process.cwd(), 'data');
+// Global in-memory cache for serverless environments
+declare global {
+  var __SKILL_BRIDGE_DB__: DatabaseSchema | undefined;
+}
+
+const IS_SERVERLESS = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const DATA_DIR = IS_SERVERLESS ? path.join('/tmp', 'skillbridge') : path.join(process.cwd(), 'data');
 const DB_FILE = path.join(DATA_DIR, 'db.json');
 
 const INITIAL_SEED: DatabaseSchema = {
@@ -391,216 +397,237 @@ const INITIAL_SEED: DatabaseSchema = {
 };
 
 function ensureDataDir() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-}
-
-export function getDatabase(): DatabaseSchema {
-  ensureDataDir();
-  if (!fs.existsSync(DB_FILE)) {
-    fs.writeFileSync(DB_FILE, JSON.stringify(INITIAL_SEED, null, 2), 'utf-8');
-    return INITIAL_SEED;
-  }
-  try {
-    const raw = fs.readFileSync(DB_FILE, 'utf-8');
-    const parsed = JSON.parse(raw);
-    return {
-      analyses: parsed.analyses || INITIAL_SEED.analyses,
-      roadmaps: parsed.roadmaps || INITIAL_SEED.roadmaps,
-      revisions: parsed.revisions || INITIAL_SEED.revisions
-    };
-  } catch (err) {
-    console.error('Error reading database file, returning fallback seed', err);
-    return INITIAL_SEED;
-  }
-}
-
-export function saveDatabase(data: DatabaseSchema): void {
-  ensureDataDir();
-  try {
-    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
-  } catch (err) {
-    console.error('Failed to save database file:', err);
-  }
-}
-
-// Analysis operations
-export function getAllAnalyses(): Analysis[] {
-  const db = getDatabase();
-  return Object.values(db.analyses).sort(
-    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-  );
-}
-
-export function getAnalysisById(id: string): Analysis | null {
-  const db = getDatabase();
-  return db.analyses[id] || null;
-}
-
-export function saveAnalysis(analysis: Analysis): Analysis {
-  const db = getDatabase();
-  db.analyses[analysis.id] = analysis;
-  saveDatabase(db);
-  return analysis;
-}
-
-export function updateAnalysis(id: string, updates: Partial<Analysis>): Analysis | null {
-  const db = getDatabase();
-  if (!db.analyses[id]) return null;
-  db.analyses[id] = { ...db.analyses[id], ...updates };
-  saveDatabase(db);
-  return db.analyses[id];
-}
-
-export function deleteAnalysis(id: string): boolean {
-  const db = getDatabase();
-  if (!db.analyses[id]) return false;
-  delete db.analyses[id];
-  delete db.roadmaps[id];
-  delete db.revisions[id];
-  saveDatabase(db);
-  return true;
-}
-
-// Roadmap operations
-export function getRoadmapByAnalysisId(analysisId: string): Roadmap | null {
-  const db = getDatabase();
-  return db.roadmaps[analysisId] || null;
-}
-
-export function getRoadmapById(id: string): Roadmap | null {
-  const db = getDatabase();
-  const roadmaps = Object.values(db.roadmaps);
-  return roadmaps.find(r => r.id === id) || null;
-}
-
-export function getAllRoadmaps(): Roadmap[] {
-  const db = getDatabase();
-  return Object.values(db.roadmaps);
-}
-
-export function saveRoadmap(roadmap: Roadmap): Roadmap {
-  const db = getDatabase();
-  db.roadmaps[roadmap.analysis_id] = roadmap;
-  saveDatabase(db);
-  return roadmap;
-}
-
-export function updateRoadmapTask(
-  roadmapId: string,
-  taskId: string,
-  updates: Partial<Roadmap['milestones'][0]['tasks'][0]>
-): Roadmap | null {
-  const db = getDatabase();
-  const roadmapEntry = Object.entries(db.roadmaps).find(
-    ([, r]) => r.id === roadmapId || r.analysis_id === roadmapId
-  );
-  if (!roadmapEntry) return null;
-
-  const [key, roadmap] = roadmapEntry;
-  let taskFound = false;
-
-  for (const milestone of roadmap.milestones) {
-    const taskIndex = milestone.tasks.findIndex(t => t.id === taskId);
-    if (taskIndex !== -1) {
-      milestone.tasks[taskIndex] = {
-        ...milestone.tasks[taskIndex],
-        ...updates
-      };
-      taskFound = true;
-      break;
+    try {
+      if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
+    } catch (err) {
+      // Read-only filesystem fallback
     }
   }
 
-  if (taskFound) {
-    db.roadmaps[key] = roadmap;
-    saveDatabase(db);
-    return roadmap;
-  }
-  return null;
-}
+  export function getDatabase(): DatabaseSchema {
+    if (globalThis.__SKILL_BRIDGE_DB__) {
+      return globalThis.__SKILL_BRIDGE_DB__;
+    }
 
-// Resume Revision operations
-export function getResumeRevision(analysisId: string): ResumeRevision | null {
-  const db = getDatabase();
-  return db.revisions[analysisId] || null;
-}
+    ensureDataDir();
+      try {
+        if (fs.existsSync(DB_FILE)) {
+          const raw = fs.readFileSync(DB_FILE, 'utf-8');
+          const parsed = JSON.parse(raw);
+          const schema: DatabaseSchema = {
+            analyses: parsed.analyses || INITIAL_SEED.analyses,
+            roadmaps: parsed.roadmaps || INITIAL_SEED.roadmaps,
+            revisions: parsed.revisions || INITIAL_SEED.revisions
+          };
+          globalThis.__SKILL_BRIDGE_DB__ = schema;
+          return schema;
+        }
+      } catch (err) {
+        console.error('Error reading database file, using in-memory store:', err);
+      }
 
-export function saveResumeRevision(revision: ResumeRevision): ResumeRevision {
-  const db = getDatabase();
-  db.revisions[revision.analysis_id] = revision;
-  saveDatabase(db);
-  return revision;
-}
+      // Clone initial seed so mutations don't corrupt the constant
+      const seedClone: DatabaseSchema = JSON.parse(JSON.stringify(INITIAL_SEED));
+      globalThis.__SKILL_BRIDGE_DB__ = seedClone;
 
-export function updateResumeSuggestion(
-  analysisId: string,
-  suggestionId: string,
-  status: 'pending' | 'accepted' | 'rejected',
-  userEditedText?: string
-): ResumeRevision | null {
-  const db = getDatabase();
-  const revision = db.revisions[analysisId];
-  if (!revision) return null;
+      try {
+        ensureDataDir();
+        fs.writeFileSync(DB_FILE, JSON.stringify(seedClone, null, 2), 'utf-8');
+      } catch (err) {
+        // Ignore if filesystem is not writable
+      }
 
-  const sugIndex = revision.suggestions.findIndex(s => s.id === suggestionId);
-  if (sugIndex === -1) return null;
+      return seedClone;
+    }
 
-  revision.suggestions[sugIndex].status = status;
-  if (userEditedText !== undefined) {
-    revision.suggestions[sugIndex].user_edited_text = userEditedText;
-  }
-  revision.updated_at = new Date().toISOString();
-
-  db.revisions[analysisId] = revision;
-  saveDatabase(db);
-  return revision;
-}
-
-// Dashboard summary computation
-export function getDashboardSummary(): DashboardSummary {
-  const db = getDatabase();
-  const analyses = Object.values(db.analyses);
-  const roadmaps = Object.values(db.roadmaps);
-
-  let totalTasks = 0;
-  let completedTasks = 0;
-
-  for (const r of roadmaps) {
-    for (const m of r.milestones) {
-      for (const t of m.tasks) {
-        totalTasks++;
-        if (t.completed) completedTasks++;
+    export function saveDatabase(data: DatabaseSchema): void {
+      globalThis.__SKILL_BRIDGE_DB__ = data;
+      ensureDataDir();
+      try {
+        fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
+      } catch (err) {
+        console.warn('Filesystem write not permitted, data kept in memory:', err);
       }
     }
-  }
 
-  const avgReadiness = analyses.length > 0
-    ? Math.round(analyses.reduce((acc, a) => acc + (a.readiness?.overall_score || 0), 0) / analyses.length)
-    : 0;
+    // Analysis operations
+    export function getAllAnalyses(): Analysis[] {
+      const db = getDatabase();
+      return Object.values(db.analyses).sort(
+        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+    }
 
-  const recentAnalyses = analyses.slice(0, 5).map(a => {
-    const matchedCount = a.requirement_matches.filter(m => m.status === 'evidenced').length;
-    const missingCount = a.requirement_matches.filter(m => m.status === 'not_evidenced').length;
-    return {
-      id: a.id,
-      role_title: a.role_title,
-      target_company: a.target_company,
-      readiness_score: a.readiness?.overall_score || 0,
-      created_at: a.created_at,
-      matched_count: matchedCount,
-      missing_count: missingCount
-    };
-  });
+    export function getAnalysisById(id: string): Analysis | null {
+      const db = getDatabase();
+      return db.analyses[id] || null;
+    }
 
-  return {
-    total_analyses: analyses.length,
-    average_readiness: avgReadiness,
-    active_roadmaps_count: roadmaps.length,
-    completed_tasks_count: completedTasks,
-    total_tasks_count: totalTasks,
-    recent_analyses: recentAnalyses
-  };
-}
+    export function saveAnalysis(analysis: Analysis): Analysis {
+      const db = getDatabase();
+      db.analyses[analysis.id] = analysis;
+      saveDatabase(db);
+      return analysis;
+    }
+
+    export function updateAnalysis(id: string, updates: Partial<Analysis>): Analysis | null {
+      const db = getDatabase();
+      if (!db.analyses[id]) return null;
+      db.analyses[id] = { ...db.analyses[id], ...updates };
+      saveDatabase(db);
+      return db.analyses[id];
+    }
+
+    export function deleteAnalysis(id: string): boolean {
+      const db = getDatabase();
+      if (!db.analyses[id]) return false;
+      delete db.analyses[id];
+      delete db.roadmaps[id];
+      delete db.revisions[id];
+      saveDatabase(db);
+      return true;
+    }
+
+    // Roadmap operations
+    export function getRoadmapByAnalysisId(analysisId: string): Roadmap | null {
+      const db = getDatabase();
+      return db.roadmaps[analysisId] || null;
+    }
+
+    export function getRoadmapById(id: string): Roadmap | null {
+      const db = getDatabase();
+      const roadmaps = Object.values(db.roadmaps);
+      return roadmaps.find(r => r.id === id) || null;
+    }
+
+    export function getAllRoadmaps(): Roadmap[] {
+      const db = getDatabase();
+      return Object.values(db.roadmaps);
+    }
+
+    export function saveRoadmap(roadmap: Roadmap): Roadmap {
+      const db = getDatabase();
+      db.roadmaps[roadmap.analysis_id] = roadmap;
+      saveDatabase(db);
+      return roadmap;
+    }
+
+    export function updateRoadmapTask(
+      roadmapId: string,
+      taskId: string,
+      updates: Partial<Roadmap['milestones'][0]['tasks'][0]>
+    ): Roadmap | null {
+      const db = getDatabase();
+      const roadmapEntry = Object.entries(db.roadmaps).find(
+        ([, r]) => r.id === roadmapId || r.analysis_id === roadmapId
+      );
+      if (!roadmapEntry) return null;
+
+      const [key, roadmap] = roadmapEntry;
+      let taskFound = false;
+
+      for (const milestone of roadmap.milestones) {
+        const taskIndex = milestone.tasks.findIndex(t => t.id === taskId);
+        if (taskIndex !== -1) {
+          milestone.tasks[taskIndex] = {
+            ...milestone.tasks[taskIndex],
+            ...updates
+          };
+          taskFound = true;
+          break;
+        }
+      }
+
+      if (taskFound) {
+        db.roadmaps[key] = roadmap;
+        saveDatabase(db);
+        return roadmap;
+      }
+      return null;
+    }
+
+    // Resume Revision operations
+    export function getResumeRevision(analysisId: string): ResumeRevision | null {
+      const db = getDatabase();
+      return db.revisions[analysisId] || null;
+    }
+
+    export function saveResumeRevision(revision: ResumeRevision): ResumeRevision {
+      const db = getDatabase();
+      db.revisions[revision.analysis_id] = revision;
+      saveDatabase(db);
+      return revision;
+    }
+
+    export function updateResumeSuggestion(
+      analysisId: string,
+      suggestionId: string,
+      status: 'pending' | 'accepted' | 'rejected',
+      userEditedText?: string
+    ): ResumeRevision | null {
+      const db = getDatabase();
+      const revision = db.revisions[analysisId];
+      if (!revision) return null;
+
+      const sugIndex = revision.suggestions.findIndex(s => s.id === suggestionId);
+      if (sugIndex === -1) return null;
+
+      revision.suggestions[sugIndex].status = status;
+      if (userEditedText !== undefined) {
+        revision.suggestions[sugIndex].user_edited_text = userEditedText;
+      }
+      revision.updated_at = new Date().toISOString();
+
+      db.revisions[analysisId] = revision;
+      saveDatabase(db);
+      return revision;
+    }
+
+    // Dashboard summary computation
+    export function getDashboardSummary(): DashboardSummary {
+      const db = getDatabase();
+      const analyses = Object.values(db.analyses);
+      const roadmaps = Object.values(db.roadmaps);
+
+      let totalTasks = 0;
+      let completedTasks = 0;
+
+      for (const r of roadmaps) {
+        for (const m of r.milestones) {
+          for (const t of m.tasks) {
+            totalTasks++;
+            if (t.completed) completedTasks++;
+          }
+        }
+      }
+
+      const avgReadiness = analyses.length > 0
+        ? Math.round(analyses.reduce((acc, a) => acc + (a.readiness?.overall_score || 0), 0) / analyses.length)
+        : 0;
+
+      const recentAnalyses = analyses.slice(0, 5).map(a => {
+        const matchedCount = a.requirement_matches.filter(m => m.status === 'evidenced').length;
+        const missingCount = a.requirement_matches.filter(m => m.status === 'not_evidenced').length;
+        return {
+          id: a.id,
+          role_title: a.role_title,
+          target_company: a.target_company,
+          readiness_score: a.readiness?.overall_score || 0,
+          created_at: a.created_at,
+          matched_count: matchedCount,
+          missing_count: missingCount
+        };
+      });
+
+      return {
+        total_analyses: analyses.length,
+        average_readiness: avgReadiness,
+        active_roadmaps_count: roadmaps.length,
+        completed_tasks_count: completedTasks,
+        total_tasks_count: totalTasks,
+        recent_analyses: recentAnalyses
+      };
+    }
 

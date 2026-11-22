@@ -115,6 +115,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       id: analysisId,
+      analysis,
+      roadmap,
+      revision,
       is_ai_powered,
       message: 'Analysis successfully generated'
     });

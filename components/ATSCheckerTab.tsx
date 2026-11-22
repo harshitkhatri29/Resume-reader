@@ -46,7 +46,7 @@ export default function ATSCheckerTab({ diagnostics }: ATSCheckerTabProps) {
 
       {/* Top Metrics Row */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        
+
         {/* ATS Match Score */}
         <div className="card-playful p-6 flex flex-col justify-between">
           <div className="flex items-center justify-between">
@@ -125,11 +125,10 @@ export default function ATSCheckerTab({ diagnostics }: ATSCheckerTabProps) {
           {Object.entries(diagnostics.sections_detected).map(([sec, detected]) => (
             <div
               key={sec}
-              className={`p-3 rounded-xl border flex flex-col items-center justify-center text-center space-y-1 ${
-                detected
-                  ? 'bg-emerald-50/60 border-emerald-300 text-emerald-900'
-                  : 'bg-red-50/60 border-red-300 text-red-900'
-              }`}
+              className={`p-3 rounded-xl border flex flex-col items-center justify-center text-center space-y-1 ${detected
+                ? 'bg-emerald-50/60 border-emerald-300 text-emerald-900'
+                : 'bg-red-50/60 border-red-300 text-red-900'
+                }`}
             >
               {detected ? (
                 <CheckCircle2 className="w-5 h-5 text-emerald-600" />

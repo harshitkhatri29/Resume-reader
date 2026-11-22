@@ -19,6 +19,7 @@ import {
   Target,
   FolderOpen
 } from 'lucide-react';
+import { getAllLocalRoadmaps, updateLocalRoadmapTask } from '@/lib/clientStorage';
 
 export default function ProgressPage() {
   const [analyses, setAnalyses] = useState<Analysis[]>([]);
@@ -27,49 +28,59 @@ export default function ProgressPage() {
 
   const loadData = async () => {
     try {
-      const res = await fetch('/api/analyses');
-      if (res.ok) {
-        const data: Analysis[] = await res.json();
-        setAnalyses(data);
+        const res = await fetch('/api/analyses').catch(() => null);
+        let serverRoadmaps: Roadmap[] = [];
 
-        // Fetch roadmaps for all analyses
-        const roadmapPromises = data.map(a =>
-          fetch(`/api/analyses/${a.id}/roadmap`)
-            .then(r => (r.ok ? r.json() : null))
-            .catch(() => null)
-        );
-        const resolvedRoadmaps = await Promise.all(roadmapPromises);
-        setRoadmaps(resolvedRoadmaps.filter(Boolean));
+        if (res && res.ok) {
+          const data: Analysis[] = await res.json();
+          setAnalyses(data);
+
+          const roadmapPromises = data.map(a =>
+            fetch(`/api/analyses/${a.id}/roadmap`)
+              .then(r => (r.ok ? r.json() : null))
+              .catch(() => null)
+          );
+          const resolvedRoadmaps = await Promise.all(roadmapPromises);
+          serverRoadmaps = resolvedRoadmaps.filter(Boolean);
+        }
+
+        const localRoadmaps = getAllLocalRoadmaps();
+        const map = new Map<string, Roadmap>();
+        serverRoadmaps.forEach(r => map.set(r.id, r));
+        localRoadmaps.forEach(r => map.set(r.id, r));
+
+        setRoadmaps(Array.from(map.values()));
+      } catch (err) {
+        console.error(err);
+        setRoadmaps(getAllLocalRoadmaps());
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
-  useEffect(() => {
+    useEffect(() => {
+      loadData();
+    }, []);
+
+    const handleToggleTask = async (roadmapId: string, task: RoadmapTask) => {
+      const newCompleted = !task.completed;
+      if (newCompleted) {
+        triggerCelebration();
+      }
+
+      updateLocalRoadmapTask(roadmapId, task.id, { completed: newCompleted });
+
+      try {
+          await fetch(`/api/roadmaps/${roadmapId}/tasks/${task.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ completed: newCompleted })
+          });
+    } catch (err) {
+      console.error('Failed to sync task with server:', err);
+    }
+
     loadData();
-  }, []);
-
-  const handleToggleTask = async (roadmapId: string, task: RoadmapTask) => {
-    const newCompleted = !task.completed;
-    if (newCompleted) {
-      triggerCelebration();
-    }
-
-    try {
-      const res = await fetch(`/api/roadmaps/${roadmapId}/tasks/${task.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ completed: newCompleted })
-      });
-      if (res.ok) {
-        loadData();
-      }
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   if (loading) {
@@ -119,7 +130,7 @@ export default function ProgressPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
@@ -178,7 +189,7 @@ export default function ProgressPage() {
 
       {/* Grid: Mastered Skills vs Logged Evidence */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
+
         {/* Mastered Skills */}
         <div className="card-playful p-6 space-y-4">
           <div className="flex items-center justify-between">
@@ -293,17 +304,15 @@ export default function ProgressPage() {
                   {milestone.tasks.map((task: RoadmapTask) => (
                     <div
                       key={task.id}
-                      className={`p-3 rounded-xl border flex items-center justify-between gap-3 text-xs ${
-                        task.completed ? 'bg-slate-50 border-slate-200 text-slate-400' : 'bg-white border-slate-200'
-                      }`}
+                      className={`p-3 rounded-xl border flex items-center justify-between gap-3 text-xs ${task.completed ? 'bg-slate-50 border-slate-200 text-slate-400' : 'bg-white border-slate-200'
+                        }`}
                     >
                       <div className="flex items-center gap-2.5">
                         <button
                           type="button"
                           onClick={() => handleToggleTask(roadmapId, task)}
-                          className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-colors ${
-                            task.completed ? 'bg-emerald-500 border-emerald-600 text-white' : 'border-slate-300 bg-white hover:border-primary'
-                          }`}
+                          className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-colors ${task.completed ? 'bg-emerald-500 border-emerald-600 text-white' : 'border-slate-300 bg-white hover:border-primary'
+                            }`}
                         >
                           {task.completed && <CheckCircle2 className="w-4 h-4" />}
                         </button>

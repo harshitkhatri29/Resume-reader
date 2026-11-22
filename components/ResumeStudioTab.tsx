@@ -35,6 +35,21 @@ export default function ResumeStudioTab({ revision, analysisId, onRevisionUpdate
     status: 'accepted' | 'rejected',
     customText?: string
   ) => {
+    // Optimistic local update
+    const updatedSuggestions = revision.suggestions.map(s => {
+      if (s.id === suggestionId) {
+        return {
+          ...s,
+          status,
+          user_edited_text: customText !== undefined ? customText : s.user_edited_text
+        };
+      }
+      return s;
+    });
+    const updatedRevision = { ...revision, suggestions: updatedSuggestions, updated_at: new Date().toISOString() };
+    onRevisionUpdate(updatedRevision);
+    setEditingId(null);
+
     try {
       const res = await fetch(`/api/resume-revisions/${analysisId}`, {
         method: 'PATCH',
@@ -48,11 +63,10 @@ export default function ResumeStudioTab({ revision, analysisId, onRevisionUpdate
 
       if (res.ok) {
         const data = await res.json();
-        onRevisionUpdate(data.revision);
-        setEditingId(null);
+        if (data.revision) onRevisionUpdate(data.revision);
       }
     } catch (err) {
-      console.error('Failed to update suggestion status:', err);
+      console.error('Failed to update suggestion status on server:', err);
     }
   };
 

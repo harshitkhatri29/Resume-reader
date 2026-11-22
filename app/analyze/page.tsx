@@ -16,6 +16,7 @@ import {
   Loader2,
   Copy
 } from 'lucide-react';
+import { saveLocalAnalysis } from '@/lib/clientStorage';
 
 const SAMPLE_JDS = [
   {
@@ -201,6 +202,10 @@ export default function AnalyzePage() {
 
       if (!res.ok) {
         throw new Error(data.error || 'Failed to process analysis');
+      }
+
+      if (data.analysis) {
+        saveLocalAnalysis(data.analysis, data.roadmap, data.revision);
       }
 
       setLoadingStep('Generating learning milestones and grounded suggestions...');

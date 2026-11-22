@@ -10,6 +10,13 @@ import LearningRoadmapTab from '@/components/LearningRoadmapTab';
 import ResumeStudioTab from '@/components/ResumeStudioTab';
 import ExtractionReviewModal from '@/components/ExtractionReviewModal';
 import {
+  saveLocalAnalysis,
+  getLocalAnalysis,
+  deleteLocalAnalysis,
+  updateLocalRoadmapTask,
+  updateLocalRevision
+} from '@/lib/clientStorage';
+import {
   Sparkles,
   ArrowLeft,
   FileCheck2,
@@ -42,7 +49,7 @@ export default function AnalysisDetailPage({ params }: { params: { id: string } 
     fetch(`/api/analyses/${params.id}`)
       .then(async res => {
         if (!res.ok) {
-          throw new Error('Analysis not found');
+          throw new Error('Analysis not found on server');
         }
         return res.json();
       })
@@ -50,47 +57,72 @@ export default function AnalysisDetailPage({ params }: { params: { id: string } 
         setAnalysis(data.analysis);
         setRoadmap(data.roadmap);
         setRevision(data.revision);
+        saveLocalAnalysis(data.analysis, data.roadmap, data.revision);
         setLoading(false);
       })
       .catch(err => {
-        setError(err.message || 'Failed to load analysis');
+        // Transparent fallback to local storage (e.g. on serverless Vercel)
+        const local = getLocalAnalysis(params.id);
+        if (local && local.analysis) {
+          setAnalysis(local.analysis);
+          setRoadmap(local.roadmap || null);
+          setRevision(local.revision || null);
+          setError(null);
+        } else {
+          setError(err.message || 'Failed to load analysis');
+        }
         setLoading(false);
       });
   }, [params.id]);
 
   const handleSaveCorrections = async (correctedResume: any, correctedJD: any) => {
-    const res = await fetch(`/api/analyses/${params.id}/extraction`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        parsed_resume: correctedResume,
-        parsed_jd: correctedJD
-      })
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      setAnalysis(data.analysis);
-    }
-  };
-
-  const handleDelete = async () => {
-    if (!window.confirm('Are you sure you want to permanently delete this analysis and stored resume?')) {
-      return;
-    }
-
-    setDeleting(true);
     try {
-      const res = await fetch(`/api/analyses/${params.id}`, {
-        method: 'DELETE'
+      const res = await fetch(`/api/analyses/${params.id}/extraction`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          parsed_resume: correctedResume,
+          parsed_jd: correctedJD
+        })
       });
-      if (res.ok) {
-        router.push('/dashboard');
+
+        if (res.ok) {
+          const data = await res.json();
+          setAnalysis(data.analysis);
+          saveLocalAnalysis(data.analysis, roadmap, revision);
+          return;
+        }
+      } catch {
+        // ignore
       }
+
+      // Client-side state update if server patch fails
+      if (analysis) {
+        const updated: Analysis = {
+          ...analysis,
+          parsed_resume: { ...analysis.parsed_resume, ...correctedResume },
+          parsed_jd: { ...analysis.parsed_jd, ...correctedJD }
+        };
+        setAnalysis(updated);
+        saveLocalAnalysis(updated, roadmap, revision);
+      }
+    };
+
+    const handleDelete = async () => {
+      if (!window.confirm('Are you sure you want to permanently delete this analysis and stored resume?')) {
+        return;
+      }
+
+      setDeleting(true);
+      deleteLocalAnalysis(params.id);
+      try {
+          await fetch(`/api/analyses/${params.id}`, {
+            method: 'DELETE'
+          });
     } catch (err) {
-      console.error('Delete failed:', err);
-      setDeleting(false);
+      console.error('Delete request failed:', err);
     }
+    router.push('/dashboard');
   };
 
   if (loading) {
@@ -157,7 +189,7 @@ export default function AnalysisDetailPage({ params }: { params: { id: string } 
       {/* Role Banner & Overall Readiness */}
       <section className="card-playful p-6 sm:p-8 bg-white space-y-6">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-6 border-b-2 border-slate-100">
-          
+
           <div className="space-y-2">
             <div className="flex items-center gap-2 flex-wrap">
               <span className="px-3 py-1 rounded-full bg-peach/50 border border-navy/20 text-navy font-bold text-xs uppercase tracking-wider">
@@ -204,7 +236,7 @@ export default function AnalysisDetailPage({ params }: { params: { id: string } 
 
         {/* 4 Dimension Readiness Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          
+
           <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
             <span className="text-[11px] font-bold text-navy-muted uppercase tracking-wider block">
               Core Skills
@@ -278,55 +310,49 @@ export default function AnalysisDetailPage({ params }: { params: { id: string } 
 
       {/* Navigation Tabs */}
       <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-white border-2 border-slate-900/10 shadow-sm">
-        
+
         <button
           onClick={() => setActiveTab('gaps')}
-          className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 transition-all ${
-            activeTab === 'gaps'
+          className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 transition-all ${activeTab === 'gaps'
               ? 'bg-primary text-white border-2 border-navy shadow-chunky-sm'
               : 'text-navy-muted hover:text-navy hover:bg-slate-50'
-          }`}
+            }`}
         >
           <Target className="w-4 h-4" />
           <span>Skills Gap Analyzer</span>
-          <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-            activeTab === 'gaps' ? 'bg-white text-navy' : 'bg-slate-100 text-slate-700'
-          }`}>
+          <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${activeTab === 'gaps' ? 'bg-white text-navy' : 'bg-slate-100 text-slate-700'
+            }`}>
             {analysis.requirement_matches.length}
           </span>
         </button>
 
         <button
           onClick={() => setActiveTab('ats')}
-          className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 transition-all ${
-            activeTab === 'ats'
+          className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 transition-all ${activeTab === 'ats'
               ? 'bg-primary text-white border-2 border-navy shadow-chunky-sm'
               : 'text-navy-muted hover:text-navy hover:bg-slate-50'
-          }`}
+            }`}
         >
           <FileCheck2 className="w-4 h-4" />
           <span>ATS Diagnostics</span>
-          <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-            activeTab === 'ats' ? 'bg-white text-navy' : 'bg-slate-100 text-slate-700'
-          }`}>
+          <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${activeTab === 'ats' ? 'bg-white text-navy' : 'bg-slate-100 text-slate-700'
+            }`}>
             {analysis.ats_diagnostics.overall_ats_score}%
           </span>
         </button>
 
         <button
           onClick={() => setActiveTab('roadmap')}
-          className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 transition-all ${
-            activeTab === 'roadmap'
+          className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 transition-all ${activeTab === 'roadmap'
               ? 'bg-primary text-white border-2 border-navy shadow-chunky-sm'
               : 'text-navy-muted hover:text-navy hover:bg-slate-50'
-          }`}
+            }`}
         >
           <Compass className="w-4 h-4" />
           <span>Learning Roadmap</span>
           {missingGapsCount > 0 && (
-            <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-              activeTab === 'roadmap' ? 'bg-mint text-navy' : 'bg-peach text-navy'
-            }`}>
+            <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${activeTab === 'roadmap' ? 'bg-mint text-navy' : 'bg-peach text-navy'
+              }`}>
               {missingGapsCount} Gaps
             </span>
           )}
@@ -334,18 +360,16 @@ export default function AnalysisDetailPage({ params }: { params: { id: string } 
 
         <button
           onClick={() => setActiveTab('studio')}
-          className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 transition-all ${
-            activeTab === 'studio'
+          className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 transition-all ${activeTab === 'studio'
               ? 'bg-primary text-white border-2 border-navy shadow-chunky-sm'
               : 'text-navy-muted hover:text-navy hover:bg-slate-50'
-          }`}
+            }`}
         >
           <FileText className="w-4 h-4" />
           <span>Resume Studio</span>
           {revision && (
-            <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-              activeTab === 'studio' ? 'bg-white text-navy' : 'bg-slate-100 text-slate-700'
-            }`}>
+            <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${activeTab === 'studio' ? 'bg-white text-navy' : 'bg-slate-100 text-slate-700'
+              }`}>
               {revision.suggestions.length} Edits
             </span>
           )}
@@ -369,7 +393,10 @@ export default function AnalysisDetailPage({ params }: { params: { id: string } 
         {activeTab === 'roadmap' && roadmap && (
           <LearningRoadmapTab
             roadmap={roadmap}
-            onRoadmapUpdate={(updated) => setRoadmap(updated)}
+            onRoadmapUpdate={(updated) => {
+              setRoadmap(updated);
+              if (analysis) saveLocalAnalysis(analysis, updated, revision);
+            }}
           />
         )}
 
@@ -377,7 +404,10 @@ export default function AnalysisDetailPage({ params }: { params: { id: string } 
           <ResumeStudioTab
             revision={revision}
             analysisId={analysis.id}
-            onRevisionUpdate={(updated) => setRevision(updated)}
+            onRevisionUpdate={(updated) => {
+              setRevision(updated);
+              if (analysis) saveLocalAnalysis(analysis, roadmap, updated);
+            }}
           />
         )}
       </div>
